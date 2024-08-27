@@ -26,6 +26,7 @@
         <module>DiscoveryServer</module>
         <module>UserService</module>
         <module>VehicleInventoryService</module>
+        <module>ApiGateway</module>
     </modules>
 
     <scm>

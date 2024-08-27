@@ -1,6 +1,3 @@
-##eureka.username=${EUREKA_USERNAME:eureka}
-#eureka.password=${EUREKA_PASSWORD:password}
-
 server:
   port: 8761
 
@@ -10,4 +7,5 @@ eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
-
+  username: ${EUREKA_USERNAME:eureka}
+  password: ${EUREKA_PASSWORD:password}
