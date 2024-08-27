@@ -1,0 +1,13 @@
+##eureka.username=${EUREKA_USERNAME:eureka}
+#eureka.password=${EUREKA_PASSWORD:password}
+
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
