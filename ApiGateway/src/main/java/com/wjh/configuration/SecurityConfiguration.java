@@ -17,6 +17,7 @@ public class SecurityConfiguration {
 
         serverHttpSecurity.authorizeExchange(auth ->
                 auth.pathMatchers("/eureka/**").permitAll()
+                        .pathMatchers("/user/create-user").permitAll()
                         .anyExchange().authenticated())
                 .oauth2ResourceServer(oauth2 ->
                         oauth2.jwt(Customizer.withDefaults()));
