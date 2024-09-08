@@ -4,6 +4,19 @@ server:
 spring:
   application:
     name: user-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+
+identity-provider:
+  url: localhost:8180
+  client-id: personal-project
+  client-secret: bMV6RHv29VqNJrx1CEmaFS1CPighcamk
 
 eureka:
   instance:
