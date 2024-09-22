@@ -32,6 +32,7 @@ public class UserService {
     public ProfileCreationResponse createProfile(ProfileCreationRequest request) {
         ResponseEntity<?> userCreationKeyCloakResponse;
         try {
+            log.info("Bearer " + identityService.exchangeClientToken());
             //Create user in KeyCloak
             userCreationKeyCloakResponse = identityClient.createUserKeyCloak(
                     "Bearer " + identityService.exchangeClientToken(),

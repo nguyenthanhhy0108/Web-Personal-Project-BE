@@ -1,10 +1,7 @@
 package com.wjh.service;
 
-import com.wjh.dto.request.identity.TokenExchangeParam;
-import com.wjh.dto.response.identity.TokenExchangeResponse;
+import com.wjh.dto.request.identity.ClientTokenExchangeParam;
 import com.wjh.repository.IdentityClient;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +25,7 @@ public class IdentityService {
     private String clientSecret;
 
     public String exchangeClientToken() {
-        var clientTokenObject = identityClient.exchangeToken(TokenExchangeParam.builder()
+        var clientTokenObject = identityClient.exchangeToken(ClientTokenExchangeParam.builder()
                         .client_id(clientID)
                         .client_secret(clientSecret)
                         .scope("openid")

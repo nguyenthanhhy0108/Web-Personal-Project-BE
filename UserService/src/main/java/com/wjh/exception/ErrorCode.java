@@ -8,13 +8,13 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum ErrorCode {
     UNCATEGORIZED_EXCEPTION(9999, "Uncategorized error", HttpStatus.INTERNAL_SERVER_ERROR),
-    USERNAME_IS_MISSING(1001, "Username is missing", HttpStatus.BAD_REQUEST),
-    PASSWORD_IS_MISSING(1002, "Password is missing", HttpStatus.BAD_REQUEST),
-    USER_EXISTED(1003, "Username existed, please choose another one", HttpStatus.BAD_REQUEST),
-    EMAIL_EXISTED(1004, "Email existed, please choose another one", HttpStatus.BAD_REQUEST),
-    INVALID_DOB(1005, "Your age must be at least {min}", HttpStatus.BAD_REQUEST),
-    INVALID_USERNAME(1006, "Your username must be between {min} and {max} characters", HttpStatus.BAD_REQUEST),
-    INVALID_PASSWORD(1007, "Your password must be between {min} and {max} characters", HttpStatus.BAD_REQUEST),
+    USERNAME_IS_MISSING(9001, "Username is missing", HttpStatus.BAD_REQUEST),
+    PASSWORD_IS_MISSING(9002, "Password is missing", HttpStatus.BAD_REQUEST),
+    USER_EXISTED(9003, "Username existed, please choose another one", HttpStatus.BAD_REQUEST),
+    EMAIL_EXISTED(9004, "Email existed, please choose another one", HttpStatus.BAD_REQUEST),
+    INVALID_DOB(9005, "Your age must be at least {min}", HttpStatus.BAD_REQUEST),
+    INVALID_USERNAME(9006, "Your username must be between {min} and {max} characters", HttpStatus.BAD_REQUEST),
+    INVALID_PASSWORD(9007, "Your password must be between {min} and {max} characters", HttpStatus.BAD_REQUEST),
     ;
 
     private final int code;

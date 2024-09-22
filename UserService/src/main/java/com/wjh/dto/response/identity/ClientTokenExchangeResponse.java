@@ -15,7 +15,7 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class TokenExchangeResponse {
+public class ClientTokenExchangeResponse {
     String accessToken;
     String expiresIn;
     String refreshExpiresIn;
