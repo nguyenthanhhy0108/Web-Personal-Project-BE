@@ -1,5 +1,6 @@
 package com.wjh.controller;
 
+import com.wjh.dto.request.identity.GoogleCodeParam;
 import com.wjh.dto.request.identity.UserCredentials;
 import com.wjh.dto.response.ApiResponse;
 import com.wjh.dto.response.identity.UserTokenExchangeResponse;
@@ -22,6 +23,21 @@ public class AuthenticationController {
     @PostMapping("/get-tokens")
     public Mono<ResponseEntity<ApiResponse<String>>> getAccessToken(@RequestBody UserCredentials userCredentials) {
         return authenticationService.exchangeUserToken(userCredentials)
+                .map(UserTokenExchangeResponse::getAccessToken)
+                .map(token -> {
+                    ApiResponse<String> apiResponse = ApiResponse.<String>builder()
+                            .data(token)
+                            .build();
+
+                    return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+                });
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/get-tokens-by-google-code")
+    public Mono<ResponseEntity<ApiResponse<String>>> getAccessTokenByGoogleCode(
+            @RequestBody GoogleCodeParam googleCodeParam) {
+        return authenticationService.exchangeUserTokenWithGoogleCode(googleCodeParam)
                 .map(UserTokenExchangeResponse::getAccessToken)
                 .map(token -> {
                     ApiResponse<String> apiResponse = ApiResponse.<String>builder()

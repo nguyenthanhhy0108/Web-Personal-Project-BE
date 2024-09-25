@@ -1,6 +1,7 @@
 package com.wjh.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wjh.dto.request.identity.GoogleCodeParam;
 import com.wjh.dto.request.identity.UserCredentials;
 import com.wjh.dto.response.identity.UserTokenExchangeResponse;
 import com.wjh.exception.AppException;
@@ -36,7 +37,7 @@ public class AuthenticationControllerTest {
     private AuthenticationService authenticationService;
 
     private UserCredentials userCredentials;
-
+    private GoogleCodeParam googleCodeParam;
     private UserTokenExchangeResponse userTokenExchangeResponse;
 
     @BeforeEach
@@ -48,6 +49,11 @@ public class AuthenticationControllerTest {
 
         userTokenExchangeResponse = new UserTokenExchangeResponse();
         userTokenExchangeResponse.setAccessToken(token);
+
+        googleCodeParam = GoogleCodeParam.builder()
+                .code("abc")
+                .redirectUri("abc")
+                .build();
     }
 
     @Test
@@ -106,5 +112,57 @@ public class AuthenticationControllerTest {
                 .expectStatus().isUnauthorized()
                 .expectBody()
                 .jsonPath("code").isEqualTo("9000");
+    }
+
+    @Test
+        /*
+         * Change token in properties file when you need
+         * */
+    void getAccessTokenByGoogleCode_validRequest_success() throws Exception {
+        //GIVEN
+        ObjectMapper objectMapper = new ObjectMapper();
+        String content = objectMapper.writeValueAsString(googleCodeParam);
+
+        Mockito.when(authenticationService.exchangeUserTokenWithGoogleCode(any()))
+                .thenReturn(Mono.just(userTokenExchangeResponse));
+
+        //WHEN //THEN
+        webTestClient.post()
+                .uri("/app/get-tokens-by-google-code")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(content)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.code").isEqualTo("1000");
+    }
+
+    @Test
+        /*
+         * Change token in properties file when you need
+         * */
+    void getAccessTokenByGoogleCode_invalidRequest_fail() throws Exception {
+        //GIVEN
+        ObjectMapper objectMapper = new ObjectMapper();
+        String content = objectMapper.writeValueAsString(googleCodeParam);
+
+        AppException appException;
+
+        appException = AppException.builder()
+                .errorCode(ErrorCode.GOOGLE_CODE_INVALID)
+                .build();
+
+        Mockito.when(authenticationService.exchangeUserTokenWithGoogleCode(any()))
+                .thenThrow(appException);
+
+        //WHEN //THEN
+        webTestClient.post()
+                .uri("/app/get-tokens-by-google-code")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(content)
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody()
+                .jsonPath("$.code").isEqualTo("9001");
     }
 }

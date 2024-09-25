@@ -21,6 +21,8 @@ public class ErrorNormalizer {
         errorCodeMap = new HashMap<>();
 
         errorCodeMap.put("Invalid user credentials", ErrorCode.WRONG_CREDENTIALS);
+        errorCodeMap.put("Code not valid", ErrorCode.GOOGLE_CODE_INVALID);
+        errorCodeMap.put("Incorrect redirect_uri", ErrorCode.GOOGLE_INVALID_REDIRECT_URI);
     }
 
     public AppException handleKeyCloakException(WebClientResponseException exception) {
@@ -29,6 +31,8 @@ public class ErrorNormalizer {
         try {
             log.warn("Parsing may be incompletely");
             response = objectMapper.readValue(exception.getResponseBodyAsString(), KeyCloakError.class);
+
+            log.error(response.getErrorDescription());
 
             return new AppException(errorCodeMap.get(response.getErrorDescription()));
         } catch (JsonProcessingException e) {

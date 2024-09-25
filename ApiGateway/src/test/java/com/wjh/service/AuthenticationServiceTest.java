@@ -1,5 +1,6 @@
 package com.wjh.service;
 
+import com.wjh.dto.request.identity.GoogleCodeParam;
 import com.wjh.dto.request.identity.UserCredentials;
 import com.wjh.dto.response.ApiResponse;
 import com.wjh.dto.response.identity.UserTokenExchangeResponse;
@@ -28,6 +29,7 @@ public class AuthenticationServiceTest {
     @Value("${test.access-token}")
     private String token;
     private UserCredentials userCredentials;
+    private GoogleCodeParam googleCodeParam;
     private UserTokenExchangeResponse userTokenExchangeResponse;
     @Mock
     private WebClient webClient;
@@ -41,6 +43,11 @@ public class AuthenticationServiceTest {
 
         userTokenExchangeResponse = new UserTokenExchangeResponse();
         userTokenExchangeResponse.setAccessToken(token);
+
+        googleCodeParam = GoogleCodeParam.builder()
+                .code("abc")
+                .redirectUri("abc")
+                .build();
     }
 
     @Test
@@ -91,4 +98,49 @@ public class AuthenticationServiceTest {
         });
     }
 
+    @Test
+    void exchangeUserTokenWithGoogleCode_validRequest_success() {
+        WebClient.RequestHeadersSpec requestHeadersSpec = Mockito.mock(WebClient.RequestHeadersSpec.class);
+        WebClient.RequestBodyUriSpec requestBodyUriSpec = Mockito.mock(WebClient.RequestBodyUriSpec.class);
+        WebClient.ResponseSpec responseSpec = Mockito.mock(WebClient.ResponseSpec.class);
+
+        Mockito.when(webClient.post()).thenReturn(requestBodyUriSpec);
+        Mockito.when(requestBodyUriSpec.uri("/realms/wjh-project/protocol/openid-connect/token")).thenReturn(requestBodyUriSpec);
+        Mockito.when(requestBodyUriSpec.body(any())).thenReturn(requestHeadersSpec);
+        Mockito.when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
+        Mockito.when(responseSpec.bodyToMono(UserTokenExchangeResponse.class)).thenReturn(Mono.just(userTokenExchangeResponse));
+
+        Mono<UserTokenExchangeResponse> result = authenticationService.exchangeUserTokenWithGoogleCode(googleCodeParam);
+        result.subscribe(response -> assertEquals(token, response.getAccessToken()));
+    }
+
+    @Test
+    void exchangeUserTokenWithGoogleCode_invalidRequest_fail() {
+
+        AppException appException;
+
+        appException = AppException.builder()
+                .errorCode(ErrorCode.UNCATEGORIZED_EXCEPTION)
+                .build();
+
+        WebClient.RequestHeadersSpec requestHeadersSpec = Mockito.mock(WebClient.RequestHeadersSpec.class);
+        WebClient.RequestBodyUriSpec requestBodyUriSpec = Mockito.mock(WebClient.RequestBodyUriSpec.class);
+        WebClient.ResponseSpec responseSpec = Mockito.mock(WebClient.ResponseSpec.class);
+
+        Mockito.when(webClient.post()).thenReturn(requestBodyUriSpec);
+        Mockito.when(requestBodyUriSpec.uri("/realms/wjh-project/protocol/openid-connect/token")).thenReturn(requestBodyUriSpec);
+        Mockito.when(requestBodyUriSpec.body(any())).thenReturn(requestHeadersSpec);
+        Mockito.when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
+        Mockito.when(responseSpec.bodyToMono(UserTokenExchangeResponse.class)).thenThrow(appException);
+
+        ApiResponse<AppException> apiResponse = new ApiResponse<>(
+                appException.getErrorCode().getCode(),
+                appException.getErrorCode().getMessage(),
+                appException
+        );
+        Mono<ApiResponse<AppException>> exception = Mono.just(apiResponse);
+        exception.subscribe(response -> {
+            assertEquals(9999, response.getCode());
+        });
+    }
 }
