@@ -16,7 +16,7 @@ spring:
 identity-provider:
   url: localhost:8180
   client-id: personal-project
-  client-secret: bMV6RHv29VqNJrx1CEmaFS1CPighcamk
+  client-secret: 6QvLv08VvtGnpCwrAQziM7IKjurbCOGj
 
 eureka:
   instance:

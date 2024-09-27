@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: vehicle-inventory-service
+    name: notification-service
   jpa:
     hibernate:
       ddl-auto: update
@@ -11,6 +11,12 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+
+
+identity-provider:
+  url: localhost:8180
+  client-id: personal-project
+  client-secret: 6QvLv08VvtGnpCwrAQziM7IKjurbCOGj
 
 eureka:
   instance:

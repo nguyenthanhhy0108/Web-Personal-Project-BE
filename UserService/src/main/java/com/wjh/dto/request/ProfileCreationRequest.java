@@ -21,7 +21,7 @@ public class ProfileCreationRequest {
     private String password;
 
     private String email;
-    @UsernameConstraint(min = 8, max = 16, message = "INVALID_USERNAME")
+    @UsernameConstraint(min = 8, max = 32, message = "INVALID_USERNAME")
     @NotNull(message = "USERNAME_IS_MISSING")
     private String username;
     @NotNull
