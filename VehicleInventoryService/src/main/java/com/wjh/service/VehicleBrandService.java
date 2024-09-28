@@ -2,13 +2,11 @@ package com.wjh.service;
 
 import com.wjh.dto.request.VehicleBrandRequest;
 import com.wjh.dto.response.VehicleBrandResponse;
-import com.wjh.dto.response.VehicleResponse;
 import com.wjh.entity.VehicleBrand;
 import com.wjh.exception.AppException;
 import com.wjh.exception.ErrorCode;
 import com.wjh.mapper.VehicleBrandMapper;
 import com.wjh.repository.VehicleBrandRepository;
-import com.wjh.repository.VehicleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -59,8 +59,21 @@ public class GlobalExceptionHandler {
         }
 
         apiResponse.setCode(errorCode.getCode());
+        apiResponse.setMessage(
+                Objects.nonNull(attributes) ?
+                        mapAttribute(errorCode.getMessage(), attributes) :
+                        errorCode.getMessage());
 
         return ResponseEntity.badRequest().body(apiResponse);
     }
 
+    private String mapAttribute(String message, Map<String, Object> attributes){
+        String minValue = String.valueOf(attributes.get(MIN_ATTRIBUTE));
+        String maxValue = String.valueOf(attributes.get(MAX_ATTRIBUTE));
+
+        message = message.replace("{" + MIN_ATTRIBUTE + "}", minValue);
+        message = message.replace("{" + MAX_ATTRIBUTE + "}", maxValue);
+
+        return message;
+    }
 }

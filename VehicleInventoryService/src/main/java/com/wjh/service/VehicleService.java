@@ -1,8 +1,8 @@
 package com.wjh.service;
 
 import com.wjh.dto.request.ChangeVehicleAmountRequest;
-import com.wjh.dto.request.VehicleRequest;
-import com.wjh.dto.response.VehicleResponse;
+import com.wjh.dto.request.VehicleCreationRequest;
+import com.wjh.dto.response.VehicleWithBrandResponse;
 import com.wjh.entity.Vehicle;
 import com.wjh.entity.VehicleBrand;
 import com.wjh.exception.AppException;
@@ -25,52 +25,75 @@ public class VehicleService {
     private final VehicleMapper vehicleMapper;
 
     @Transactional
-    public VehicleResponse saveVehicle(VehicleRequest vehicleRequest) {
+    public VehicleWithBrandResponse saveVehicle(VehicleCreationRequest vehicleRequest) {
+        VehicleBrand vehicleBrand = null;
+
         Vehicle vehicle = vehicleRepository.findByVehicleName(vehicleRequest.getVehicleName());
         if (vehicle != null) {
             int newAmount = vehicleRequest.getNumberOfRemaining() + vehicle.getNumberOfRemaining();
             vehicle.setNumberOfRemaining(newAmount);
         } else {
             vehicle = vehicleMapper.toVehicle(vehicleRequest);
+            vehicleBrand = this.vehicleBrandRepository.findByBrandName(vehicleRequest.getVehicleBrandName());
+            if (vehicleBrand == null) {
+                throw new AppException(ErrorCode.BRAND_NOT_EXIST);
+            } else {
+                vehicle.setVehicleBrand(vehicleBrand);
+            }
         }
         Vehicle saved = vehicleRepository.save(vehicle);
-        return vehicleMapper.toVehicleResponse(saved);
+        VehicleWithBrandResponse vehicleWithBrandResponse = vehicleMapper.toVehicleResponse(saved);
+        assert vehicleBrand != null;
+        vehicleWithBrandResponse.setBrandName(vehicleBrand.getBrandName());
+
+        return vehicleWithBrandResponse;
     }
 
 
     @Transactional
-    public VehicleResponse changeAmountOfVehicle(ChangeVehicleAmountRequest changeVehicleAmountRequest) {
+    public VehicleWithBrandResponse changeAmountOfVehicle(ChangeVehicleAmountRequest changeVehicleAmountRequest) {
+        String vehicleBrand;
         Vehicle vehicle = vehicleRepository.findByVehicleName(changeVehicleAmountRequest.getVehicleName());
         if (vehicle == null) {
             throw new AppException(ErrorCode.VEHICLE_NOT_EXIST);
         }
         else {
-            vehicle.setNumberOfRemaining(vehicle.getNumberOfRemaining() + changeVehicleAmountRequest.getAmount());
-            if (changeVehicleAmountRequest.getAmount() < 0) {
+            if (-changeVehicleAmountRequest.getAmount() >= vehicle.getNumberOfRemaining()) {
                 throw new AppException(ErrorCode.VEHICLE_LESS_THAN_DESIRE);
             }
+            vehicle.setNumberOfRemaining(vehicle.getNumberOfRemaining() + changeVehicleAmountRequest.getAmount());
+            vehicleBrand = vehicle.getVehicleBrand().getBrandName();
         }
-        return vehicleMapper.toVehicleResponse(vehicleRepository.save(vehicle));
+        VehicleWithBrandResponse vehicleWithBrandResponse = vehicleMapper.toVehicleResponse(vehicleRepository.save(vehicle));
+        assert vehicleBrand != null;
+        vehicleWithBrandResponse.setBrandName(vehicleBrand);
+        return vehicleWithBrandResponse;
     }
 
 
     @Transactional
-    public void deleteVehicle(VehicleRequest vehicleRequest) {
-        Vehicle vehicle = vehicleRepository.findByVehicleName(vehicleRequest.getVehicleName());
+    public void deleteVehicle(String vehicleName, String vehicleBrandName) {
+        Vehicle vehicle = vehicleRepository.findByVehicleName(vehicleName);
         if (vehicle == null) {
             throw new AppException(ErrorCode.VEHICLE_NOT_EXIST);
         } else {
-            vehicleRepository.delete(vehicle);
+            if (vehicle.getVehicleBrand().getBrandName().equals(vehicleBrandName)) {
+                vehicleRepository.delete(vehicle);
+            } else {
+                throw new AppException(ErrorCode.VEHICLE_NOT_EXIST);
+            }
         }
     }
 
-    public List<VehicleResponse> getAllVehicles() {
+    public List<VehicleWithBrandResponse> getAllVehicles() {
         List<Vehicle> vehicles = vehicleRepository.findAll();
         return vehicles.stream().map(this.vehicleMapper::toVehicleResponse).toList();
     }
 
-
-    public List<VehicleResponse> getAllVehiclesByBrandName(String brandName) {
+    public List<VehicleWithBrandResponse> getAllVehiclesByBrandName(String brandName) {
+        if (brandName == null) {
+            throw new AppException(ErrorCode.BRAND_NOT_EXIST);
+        }
         VehicleBrand vehicleBrand = vehicleBrandRepository.findByBrandName(brandName);
         if (vehicleBrand == null) {
             throw new AppException(ErrorCode.BRAND_NOT_EXIST);
