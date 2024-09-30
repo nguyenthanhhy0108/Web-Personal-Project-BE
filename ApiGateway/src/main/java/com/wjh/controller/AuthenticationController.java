@@ -20,7 +20,7 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/get-tokens")
+    @PostMapping("/token")
     public Mono<ResponseEntity<ApiResponse<String>>> getAccessToken(@RequestBody UserCredentials userCredentials) {
         return authenticationService.exchangeUserToken(userCredentials)
                 .map(UserTokenExchangeResponse::getAccessToken)

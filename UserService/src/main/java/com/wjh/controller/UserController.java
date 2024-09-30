@@ -22,7 +22,7 @@ public class UserController {
     private final UserService userService;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/create-user")
+    @PostMapping("/profiles")
     public ResponseEntity<ApiResponse<ProfileCreationResponse>> createUser(
             @RequestBody @Valid ProfileCreationRequest profileCreationRequest) {
         log.info("Creating profile");

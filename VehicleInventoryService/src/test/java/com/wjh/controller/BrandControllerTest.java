@@ -22,7 +22,7 @@ import java.util.List;
 @SpringBootTest
 @Slf4j
 @AutoConfigureMockMvc
-public class VehicleInventoryControllerTest {
+public class BrandControllerTest {
 
     @MockBean
     VehicleService vehicleService;

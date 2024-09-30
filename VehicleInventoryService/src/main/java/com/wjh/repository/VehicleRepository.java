@@ -9,6 +9,9 @@ import java.util.List;
 
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, String> {
+    Vehicle findByVehicleId(String vehicleId);
     Vehicle findByVehicleName(String vehicleName);
     List<Vehicle> findByVehicleBrand(VehicleBrand vehicleBrand);
+    void deleteByVehicleBrand(VehicleBrand vehicleBrand);
+    boolean existsByVehicleBrand(VehicleBrand vehicleBrand);
 }

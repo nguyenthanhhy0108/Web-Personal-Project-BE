@@ -7,6 +7,7 @@ import com.wjh.exception.AppException;
 import com.wjh.exception.ErrorCode;
 import com.wjh.mapper.VehicleBrandMapper;
 import com.wjh.repository.VehicleBrandRepository;
+import com.wjh.repository.VehicleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.List;
 public class VehicleBrandService {
 
     private final VehicleBrandRepository vehicleBrandRepository;
+    private final VehicleRepository vehicleRepository;
     private final VehicleBrandMapper vehicleBrandMapper;
 
     @Transactional
@@ -33,12 +35,15 @@ public class VehicleBrandService {
     }
 
 
-    public void deleteVehicleBrand(VehicleBrandRequest vehicleBrandRequest) {
-        String brandName = vehicleBrandRequest.getBrandName();
+    @Transactional
+    public void deleteVehicleBrand(String brandName) {
         VehicleBrand vehicleBrand = vehicleBrandRepository.findByBrandName(brandName);
         if (vehicleBrand == null) {
             throw new AppException(ErrorCode.BRAND_NOT_EXIST);
         } else {
+            if (this.vehicleRepository.existsByVehicleBrand(vehicleBrand)) {
+                throw new AppException(ErrorCode.FOREIGN_KEY_ERROR);
+            }
             vehicleBrandRepository.delete(vehicleBrand);
         }
     }

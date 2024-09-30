@@ -11,7 +11,11 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
-
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: "root"
+    password: "0941609091Th@"
+    url: "jdbc:mysql://localhost:6606/VEHICLE_INVENTORY_SERVICE?useSSL=false&serverTimezone=UTC"
 eureka:
   instance:
     hostname: localhost

@@ -11,18 +11,36 @@ import com.wjh.mapper.VehicleMapper;
 import com.wjh.repository.VehicleBrandRepository;
 import com.wjh.repository.VehicleRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class VehicleService {
     private final VehicleRepository vehicleRepository;
     private final VehicleBrandRepository vehicleBrandRepository;
     private final VehicleMapper vehicleMapper;
+
+    @Transactional
+    public void deleteAllVehiclesByBrandName(String brandName) {
+        VehicleBrand vehicleBrand = vehicleBrandRepository.findByBrandName(brandName);
+        if (vehicleBrand == null) {
+            throw new AppException(ErrorCode.BRAND_NOT_EXIST);
+        } else {
+            try {
+                vehicleRepository.deleteByVehicleBrand(vehicleBrand);
+            } catch (RuntimeException e) {
+                log.error(e.getMessage());
+                throw new AppException(ErrorCode.DELETING_ERROR);
+            }
+        }
+    }
 
     @Transactional
     public VehicleWithBrandResponse saveVehicle(VehicleCreationRequest vehicleRequest) {
@@ -72,15 +90,16 @@ public class VehicleService {
 
 
     @Transactional
-    public void deleteVehicle(String vehicleName, String vehicleBrandName) {
-        Vehicle vehicle = vehicleRepository.findByVehicleName(vehicleName);
+    public void deleteVehicle(String vehicleId) {
+        Vehicle vehicle = vehicleRepository.findByVehicleId(vehicleId);
         if (vehicle == null) {
             throw new AppException(ErrorCode.VEHICLE_NOT_EXIST);
         } else {
-            if (vehicle.getVehicleBrand().getBrandName().equals(vehicleBrandName)) {
+            try {
                 vehicleRepository.delete(vehicle);
-            } else {
-                throw new AppException(ErrorCode.VEHICLE_NOT_EXIST);
+            } catch (EmptyResultDataAccessException e) {
+                log.error(e.getMessage());
+                throw new AppException(ErrorCode.DELETING_ERROR);
             }
         }
     }

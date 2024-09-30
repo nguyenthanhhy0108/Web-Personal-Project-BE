@@ -17,6 +17,9 @@ public class VehicleCreationRequest {
     @NotBlank(message = "BLANK_VEHICLE_NAME")
     private String vehicleName;
     @NotNull
+    @NotBlank(message = "BLANK_VEHICLE_DESCRIPTION")
+    private String vehicleDescription;
+    @NotNull
     @NotBlank(message = "BLANK_VEHICLE_PRICE")
     private String vehiclePrice;
     @NotNull
