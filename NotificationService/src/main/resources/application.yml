@@ -4,14 +4,9 @@ server:
 spring:
   application:
     name: notification-service
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-
+  data:
+    mongodb:
+      uri: mongodb://admin:admin@localhost:3303/notification-service?authSource=admin
 
 identity-provider:
   url: localhost:8180
