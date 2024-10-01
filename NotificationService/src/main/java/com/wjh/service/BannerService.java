@@ -1,8 +1,11 @@
 package com.wjh.service;
 
 import com.mongodb.client.gridfs.model.GridFSFile;
+import com.wjh.dto.request.BannerRequest;
 import com.wjh.dto.response.BannerResponse;
 import com.wjh.entity.Banner;
+import com.wjh.exception.AppException;
+import com.wjh.exception.ErrorCode;
 import com.wjh.mapper.BannerMapper;
 import com.wjh.repository.BannerRepository;
 import lombok.AllArgsConstructor;
@@ -16,7 +19,6 @@ import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -40,17 +42,25 @@ public class BannerService {
 
 
     @Transactional
-    public Banner saveBanner(Banner banner, MultipartFile imageFile) throws IOException {
-        ObjectId bannerImageId = gridFsTemplate.store(
-                imageFile.getInputStream(), imageFile.getOriginalFilename(), imageFile.getContentType());
-        banner.setBannerImageId(bannerImageId);
-        return bannerRepository.save(banner);
+    public BannerResponse saveBanner(BannerRequest bannerRequest) throws IOException {
+        try {
+            ObjectId bannerImageId = gridFsTemplate.store(
+                    bannerRequest.getBannerImage().getInputStream(),
+                    bannerRequest.getBannerImage().getOriginalFilename(),
+                    bannerRequest.getBannerImage().getContentType());
+            Banner banner = this.bannerMapper.toBanner(bannerRequest);
+            banner.setBannerImageId(bannerImageId);
+            return this.bannerMapper.toBannerResponse(bannerRepository.save(banner));
+        } catch (RuntimeException e) {
+            log.error(e.getMessage());
+            throw new AppException(ErrorCode.SAVE_BANNER_FAIL);
+        }
     }
 
 
-    public GridFsResource getBannerImage(String bannerId) throws IOException {
+    public GridFsResource getBannerImage(String bannerId) {
         Banner banner = bannerRepository.findById(bannerId)
-                .orElseThrow(() -> new RuntimeException("Banner not found"));
+                .orElseThrow(() -> new AppException(ErrorCode.IMAGE_NOT_EXISTED));
         GridFSFile file = gridFsTemplate.findOne(
                 Query.query(Criteria.where("_id").is(banner.getBannerImageId())));
         if (file != null) {
@@ -61,10 +71,15 @@ public class BannerService {
 
 
     @Transactional
-    public void deleteBannerImage(String bannerId) {
+    public void deleteBanner(String bannerId) {
         Banner banner = bannerRepository.findById(bannerId)
-                .orElseThrow(() -> new RuntimeException("Banner not found"));
+                .orElseThrow(() -> new AppException(ErrorCode.IMAGE_NOT_EXISTED));
         gridFsTemplate.delete(Query.query(Criteria.where("_id").is(banner.getBannerImageId())));
-        bannerRepository.deleteById(bannerId);
+        try {
+            bannerRepository.deleteById(bannerId);
+        } catch (RuntimeException e) {
+            log.error(e.getMessage());
+            throw new AppException(ErrorCode.DELETING_ERROR);
+        }
     }
 }

@@ -13,6 +13,12 @@ identity-provider:
   client-id: personal-project
   client-secret: bT4quORZtOYaCLmGP4ccCIMaRkA5gCJj
 
+mail:
+  host: "smtp.gmail.com"
+  port: 587
+  username: "noreply.seapplication@gmail.com"
+  password: "konq ibbe cbvb apto"
+
 eureka:
   instance:
     hostname: localhost

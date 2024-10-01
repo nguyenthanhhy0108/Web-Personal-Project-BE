@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,19 +28,19 @@ public class VehicleController {
 
     @PostMapping("/vehicles")
     @ResponseStatus(HttpStatus.CREATED)
-    public ApiResponse<VehicleWithBrandResponse> createVehicle(@RequestBody @Valid VehicleCreationRequest vehicleCreationRequest) {
-        return ApiResponse.<VehicleWithBrandResponse>builder()
+    public ResponseEntity<ApiResponse<VehicleWithBrandResponse>> createVehicle(@RequestBody @Valid VehicleCreationRequest vehicleCreationRequest) {
+        return ResponseEntity.ok(ApiResponse.<VehicleWithBrandResponse>builder()
                 .data(this.vehicleService.saveVehicle(vehicleCreationRequest))
-                .build();
+                .build());
     }
 
 
     @PutMapping("/vehicles/amount")
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse<VehicleWithBrandResponse> changeVehicleAmount(@RequestBody @Valid ChangeVehicleAmountRequest changeVehicleAmountRequest) {
-        return ApiResponse.<VehicleWithBrandResponse>builder()
+    public ResponseEntity<ApiResponse<VehicleWithBrandResponse>> changeVehicleAmount(@RequestBody @Valid ChangeVehicleAmountRequest changeVehicleAmountRequest) {
+        return ResponseEntity.ok(ApiResponse.<VehicleWithBrandResponse>builder()
                 .data(this.vehicleService.changeAmountOfVehicle(changeVehicleAmountRequest))
-                .build();
+                .build());
     }
 
 
@@ -52,19 +53,19 @@ public class VehicleController {
 
     @GetMapping("/vehicles")
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse<List<VehicleWithBrandResponse>> getAllVehicles() {
-        return ApiResponse.<List<VehicleWithBrandResponse>>builder()
+    public ResponseEntity<ApiResponse<List<VehicleWithBrandResponse>>> getAllVehicles() {
+        return ResponseEntity.ok(ApiResponse.<List<VehicleWithBrandResponse>>builder()
                 .data(this.vehicleService.getAllVehicles())
-                .build();
+                .build());
     }
 
 
     @GetMapping("/vehicles/{brandName}")
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse<List<VehicleWithBrandResponse>> getAllVehicleOfBrand(@PathVariable @NotBlank String brandName) {
-        return ApiResponse.<List<VehicleWithBrandResponse>>builder()
+    public ResponseEntity<ApiResponse<List<VehicleWithBrandResponse>>> getAllVehicleOfBrand(@PathVariable @NotBlank String brandName) {
+        return ResponseEntity.ok(ApiResponse.<List<VehicleWithBrandResponse>>builder()
                 .data(this.vehicleService.getAllVehiclesByBrandName(brandName))
-                .build();
+                .build());
     }
 
 

@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,18 +25,19 @@ public class BrandController {
     }
 
     @GetMapping("/brands")
-    public ApiResponse<List<VehicleBrandResponse>> getAllBrands() {
-        return ApiResponse.<List<VehicleBrandResponse>>builder()
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ApiResponse<List<VehicleBrandResponse>>> getAllBrands() {
+        return ResponseEntity.ok(ApiResponse.<List<VehicleBrandResponse>>builder()
                 .data(this.vehicleBrandService.getAllVehicleBrands())
-                .build();
+                .build());
     }
 
     @PostMapping("/brands")
     @ResponseStatus(HttpStatus.CREATED)
-    public ApiResponse<VehicleBrandResponse> createBrand(@RequestBody @Valid VehicleBrandRequest vehicleBrandRequest) {
-        return ApiResponse.<VehicleBrandResponse>builder()
+    public ResponseEntity<ApiResponse<VehicleBrandResponse>> createBrand(@RequestBody @Valid VehicleBrandRequest vehicleBrandRequest) {
+        return ResponseEntity.ok(ApiResponse.<VehicleBrandResponse>builder()
                 .data(this.vehicleBrandService.saveVehicleBrand(vehicleBrandRequest))
-                .build();
+                .build());
     }
 
     @DeleteMapping("/brands/{brandName}")
