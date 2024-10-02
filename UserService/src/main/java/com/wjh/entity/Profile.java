@@ -1,9 +1,6 @@
 package com.wjh.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,4 +26,7 @@ public class Profile {
     private String firstName;
     private String lastName;
     private LocalDate dateOfBirth;
+
+    @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL)
+    private UserSetting userSetting;
 }

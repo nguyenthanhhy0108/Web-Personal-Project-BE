@@ -5,6 +5,7 @@ import com.wjh.dto.request.identity.Credential;
 import com.wjh.dto.request.identity.UserCreationParam;
 import com.wjh.dto.response.ProfileCreationResponse;
 import com.wjh.entity.Profile;
+import com.wjh.entity.UserSetting;
 import com.wjh.exception.ErrorNormalizer;
 import com.wjh.mapper.ProfileMapper;
 import com.wjh.repository.IdentityClient;
@@ -28,11 +29,12 @@ public class UserService {
     private final ProfileRepository profileRepository;
     private final ProfileMapper profileMapper;
     private final ErrorNormalizer errorNormalizer;
+    private final UserSettingService userSettingService;
 
     public ProfileCreationResponse createProfile(ProfileCreationRequest request) {
         ResponseEntity<?> userCreationKeyCloakResponse;
         try {
-            log.info("Bearer " + identityService.exchangeClientToken());
+            log.info("Bearer {}", identityService.exchangeClientToken());
             //Create user in KeyCloak
             userCreationKeyCloakResponse = identityClient.createUserKeyCloak(
                     "Bearer " + identityService.exchangeClientToken(),
@@ -56,6 +58,11 @@ public class UserService {
 
         //Create user in DB
         Profile createdProfile = profileMapper.toProfile(request);
+
+        UserSetting userSetting = new UserSetting();
+        userSetting.setProfile(createdProfile);
+        createdProfile.setUserSetting(userSetting);
+
         createdProfile.setUserID(extractKeyCloakUserID(userCreationKeyCloakResponse));
         Profile resultProfile = profileRepository.save(createdProfile);
 
@@ -69,5 +76,11 @@ public class UserService {
                 .get(0);
         String[] splittedString = location.split("/");
         return splittedString[splittedString.length - 1];
+    }
+
+    public List<String> findAllNecessaryEmail() {
+        List<String> profileIdList = this.userSettingService.findAllNotifyTrueAndActiveTrueProfileId();
+        List<Profile> profiles = this.profileRepository.findByProfileIDIn(profileIdList);
+        return profiles.stream().map(Profile::getEmail).toList();
     }
 }

@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @Validated
@@ -31,5 +33,14 @@ public class UserController {
                 .data(profileCreationResponse)
                 .build();
         return ResponseEntity.ok(apiResponse);
+    }
+
+    @GetMapping("/emails")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ApiResponse<List<String>>> getNecessaryEmails() {
+        log.info("Getting necessary emails");
+        return ResponseEntity.ok(ApiResponse.<List<String>>builder()
+                .data(this.userService.findAllNecessaryEmail())
+                .build());
     }
 }
