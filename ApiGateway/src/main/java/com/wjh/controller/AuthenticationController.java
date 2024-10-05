@@ -1,16 +1,13 @@
 package com.wjh.controller;
 
-import com.wjh.dto.request.identity.GoogleCodeParam;
 import com.wjh.dto.request.identity.UserCredentials;
 import com.wjh.dto.response.ApiResponse;
-import com.wjh.dto.response.identity.UserTokenExchangeResponse;
 import com.wjh.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/app")
@@ -21,30 +18,9 @@ public class AuthenticationController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/token")
-    public Mono<ResponseEntity<ApiResponse<String>>> getAccessToken(@RequestBody UserCredentials userCredentials) {
-        return authenticationService.exchangeUserToken(userCredentials)
-                .map(UserTokenExchangeResponse::getAccessToken)
-                .map(token -> {
-                    ApiResponse<String> apiResponse = ApiResponse.<String>builder()
-                            .data(token)
-                            .build();
-
-                    return new ResponseEntity<>(apiResponse, HttpStatus.OK);
-                });
-    }
-
-    @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/get-tokens-by-google-code")
-    public Mono<ResponseEntity<ApiResponse<String>>> getAccessTokenByGoogleCode(
-            @RequestBody GoogleCodeParam googleCodeParam) {
-        return authenticationService.exchangeUserTokenWithGoogleCode(googleCodeParam)
-                .map(UserTokenExchangeResponse::getAccessToken)
-                .map(token -> {
-                    ApiResponse<String> apiResponse = ApiResponse.<String>builder()
-                            .data(token)
-                            .build();
-
-                    return new ResponseEntity<>(apiResponse, HttpStatus.OK);
-                });
+    public ResponseEntity<ApiResponse<String>> getAccessToken(@RequestBody UserCredentials userCredentials) {
+        return ResponseEntity.ok(ApiResponse.<String>builder()
+                .data(this.authenticationService.exchangeUserToken(userCredentials).getData().getAccessToken())
+                .build());
     }
 }

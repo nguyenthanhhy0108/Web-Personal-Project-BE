@@ -1,0 +1,124 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:password@localhost:8761/eureka/
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      vehicleInventoryCB:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 3
+        automatic-transition-from-open-to-half-open-enabled: true
+        register-health-indicator: true
+        slidingWindowType: COUNT_BASED
+  timelimiter:
+    configs:
+      default:
+        timeout-duration:
+          seconds: 3
+  retry:
+    configs:
+      default:
+        wait-duration:
+          seconds: 2
+        max-attempts: 3
+
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
+  application:
+    name: api-gateway
+
+
+  logging:
+    level:
+      root: INFO
+      org.springframework.cloud.gateway.route.RouteDefinitionLocator: INFO
+      org.springframework.cloud.gateway: DEBUG
+      org.springframework.cloud.client.circuitbreaker: DEBUG
+
+#  cloud:
+#    gateway:
+#      mvc:
+#        routes:
+#          - id: discovery-server
+#            uri: http://localhost:8761
+#            predicates:
+#              - Path=/eureka/web
+#            filters:
+#              - SetPath=/
+#
+#          - id: discovery-server-static
+#            uri: http://localhost:8761
+#            predicates:
+#              - Path=/eureka/**
+#
+#          - id: user-service
+#            uri: lb://user-service
+#            predicates:
+#              - Path=/user/**
+#            filters:
+#              - name: CircuitBreaker
+#                args:
+#                  name: userCB
+#                  fallbackUri: forward:/userFallback
+#
+#          - id: vehicle-inventory-service
+#            uri: lb://vehicle-inventory-service
+#            predicates:
+#              - Path=/vehicle-inventory/**
+#            filters:
+#              - name: CircuitBreaker
+#                args:
+#                  name: vehicleInventoryCB
+#                  fallbackUri: forward:/vehicle-inventory-fallback
+#
+#          - id: notification-service
+#            uri: lb://notification-service
+#            predicates:
+#              - Path=/notification/**
+#            filters:
+#              - name: CircuitBreaker
+#                args:
+#                  name: notificationCB
+#                  fallbackUri: forward:/notification-fallback
+
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/realms/wjh-project
+
+identity-provider:
+  url: http://localhost:8180
+  client-id: personal-project
+  client-secret: bT4quORZtOYaCLmGP4ccCIMaRkA5gCJj
+
+#springdoc:
+#  swagger-ui:
+#    path: /swagger-ui.html
+#    urls:
+#      - name: User Service
+#        url: /aggregate/user-service/v3/api-docs
+#      - name: Vehicle Inventory Service
+#        url: /aggregate/vehicle-inventory-service/v3/api-docs
+#      - name: Notification Service
+#        url: /aggregate/notification-service/v3/api-docs
+#  api-docs:
+#    path: /api-docs
+

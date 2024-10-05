@@ -3,9 +3,9 @@ package com.wjh.exception;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wjh.dto.response.identity.KeyCloakError;
+import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,21 +25,13 @@ public class ErrorNormalizer {
         errorCodeMap.put("Incorrect redirect_uri", ErrorCode.GOOGLE_INVALID_REDIRECT_URI);
     }
 
-    public AppException handleKeyCloakException(WebClientResponseException exception) {
+    public AppException handleKeyCloakException(FeignException exception) {
 
-        KeyCloakError response = new KeyCloakError();
-        try {
-            log.warn("Parsing may be incompletely");
-            response = objectMapper.readValue(exception.getResponseBodyAsString(), KeyCloakError.class);
-
-            log.error(response.getErrorDescription());
-
-            return new AppException(errorCodeMap.get(response.getErrorDescription()));
-        } catch (JsonProcessingException e) {
-            log.error(e.getMessage());
+        if (exception.status() == 401) {
+            return AppException.builder()
+                    .errorCode(ErrorCode.WRONG_CREDENTIALS)
+                    .build();
         }
-
-        log.error(response.toString());
 
         return new AppException(ErrorCode.UNCATEGORIZED_EXCEPTION);
     }
