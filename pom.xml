@@ -28,6 +28,7 @@
         <module>VehicleInventoryService</module>
         <module>ApiGateway</module>
         <module>NotificationService</module>
+        <module>SearchService</module>
     </modules>
 
     <scm>

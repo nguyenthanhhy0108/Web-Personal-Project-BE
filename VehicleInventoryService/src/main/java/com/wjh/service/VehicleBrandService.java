@@ -53,4 +53,9 @@ public class VehicleBrandService {
         List<VehicleBrand> vehicleBrands = vehicleBrandRepository.findAll();
         return vehicleBrands.stream().map(this.vehicleBrandMapper::toVehicleBrandResponse).toList();
     }
+
+    public List<String> getAllBrandNames() {
+        List<VehicleBrand> vehicleBrands = vehicleBrandRepository.findAll();
+        return vehicleBrands.stream().map(VehicleBrand::getBrandName).toList();
+    }
 }

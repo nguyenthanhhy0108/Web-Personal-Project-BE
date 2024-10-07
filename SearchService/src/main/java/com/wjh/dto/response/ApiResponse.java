@@ -6,17 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class VehicleWithBrandResponse {
-    private String vehicleId;
-    private String vehicleName;
-    private long vehiclePrice;
-    private String vehicleDescription;
-    private String vehicleImageUrl;
-    private int numberOfRemaining;
-    private String brandName;
+public class ApiResponse<T>{
+    @Builder.Default
+    private int code = 1000;
+    private String message;
+    private T data;
 }

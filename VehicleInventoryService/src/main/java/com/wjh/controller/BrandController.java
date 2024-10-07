@@ -32,6 +32,16 @@ public class BrandController {
                 .build());
     }
 
+
+    @GetMapping("/brands/names")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ApiResponse<List<String>>> getAllBrandNames() {
+        return ResponseEntity.ok(ApiResponse.<List<String>>builder()
+                .data(this.vehicleBrandService.getAllBrandNames())
+                .build());
+    }
+
+
     @PostMapping("/brands")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ApiResponse<VehicleBrandResponse>> createBrand(@RequestBody @Valid VehicleBrandRequest vehicleBrandRequest) {
@@ -39,6 +49,7 @@ public class BrandController {
                 .data(this.vehicleBrandService.saveVehicleBrand(vehicleBrandRequest))
                 .build());
     }
+
 
     @DeleteMapping("/brands/{brandName}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

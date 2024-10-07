@@ -5,6 +5,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 @Document("banner")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,4 +19,5 @@ public class Banner {
     private String bannerDescription;
     private String bannerUrl;
     private ObjectId bannerImageId;
+    private LocalDateTime bannerCreatedAt;
 }

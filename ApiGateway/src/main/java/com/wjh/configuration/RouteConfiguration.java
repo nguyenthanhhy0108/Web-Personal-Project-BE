@@ -3,6 +3,7 @@ package com.wjh.configuration;
 import com.wjh.dto.response.ApiResponse;
 import com.wjh.exception.ErrorCode;
 import org.springframework.cloud.gateway.server.mvc.filter.CircuitBreakerFilterFunctions;
+import org.springframework.cloud.gateway.server.mvc.handler.GatewayRouterFunctions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import static org.springframework.cloud.gateway.server.mvc.handler.HandlerFuncti
 
 @Configuration
 public class RouteConfiguration {
+
     @Bean
     public RouterFunction<ServerResponse> discoveryServerRoutes() {
         return route("discovery-server")
@@ -27,31 +29,41 @@ public class RouteConfiguration {
     }
 
     @Bean
+    public RouterFunction<ServerResponse> searchServiceRoutes() {
+        return GatewayRouterFunctions.route("search-route")
+                .route(RequestPredicates.path("/search/**"), http())
+                .filter(lb("search-service"))
+                .filter(CircuitBreakerFilterFunctions.circuitBreaker("search-service",
+                        URI.create("forward:/fallback-route")))
+                .build();
+    }
+
+    @Bean
     public RouterFunction<ServerResponse> userServiceRoutes() {
-        return route("user-route")
-                .GET("/user/**", http())
+        return GatewayRouterFunctions.route("user-route")
+                .route(RequestPredicates.path("/user/**"), http())
                 .filter(lb("user-service"))
-                .filter(CircuitBreakerFilterFunctions.circuitBreaker("vehicle-inventory-circuit-breaker",
+                .filter(CircuitBreakerFilterFunctions.circuitBreaker("search-service",
                         URI.create("forward:/fallback-route")))
                 .build();
     }
 
     @Bean
     public RouterFunction<ServerResponse> vehicleInventoryServiceRoutes() {
-        return route("vehicle-inventory-route")
-                .GET("/vehicle-inventory/**", http())
+        return GatewayRouterFunctions.route("vehicle-inventory-route")
+                .route(RequestPredicates.path("/vehicle-inventory/**"), http())
                 .filter(lb("vehicle-inventory-service"))
-                .filter(CircuitBreakerFilterFunctions.circuitBreaker("vehicle-inventory-circuit-breaker",
+                .filter(CircuitBreakerFilterFunctions.circuitBreaker("search-service",
                         URI.create("forward:/fallback-route")))
                 .build();
     }
 
     @Bean
     public RouterFunction<ServerResponse> notificationServiceRoutes() {
-        return route("notification-route")
-                .GET("/notification/**", http())
+        return GatewayRouterFunctions.route("notification-route")
+                .route(RequestPredicates.path("/notification/**"), http())
                 .filter(lb("notification-service"))
-                .filter(CircuitBreakerFilterFunctions.circuitBreaker("vehicle-inventory-circuit-breaker",
+                .filter(CircuitBreakerFilterFunctions.circuitBreaker("search-service",
                         URI.create("forward:/fallback-route")))
                 .build();
     }
@@ -62,10 +74,10 @@ public class RouteConfiguration {
                 .GET("/fallback-route", request -> ServerResponse
                         .status(HttpStatus.SERVICE_UNAVAILABLE)
                         .body(
-                            ApiResponse.<String>builder()
-                                    .code(ErrorCode.SERVICE_UNAVAILABLE.getCode())
-                                    .data(ErrorCode.SERVICE_UNAVAILABLE.getMessage())
-                                    .build()
+                                ApiResponse.<String>builder()
+                                        .code(ErrorCode.SERVICE_UNAVAILABLE.getCode())
+                                        .data(ErrorCode.SERVICE_UNAVAILABLE.getMessage())
+                                        .build()
                         ))
                 .build();
     }

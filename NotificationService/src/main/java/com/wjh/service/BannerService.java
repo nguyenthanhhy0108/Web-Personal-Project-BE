@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -40,7 +41,7 @@ public class BannerService {
 
 
     public List<BannerResponse> findAll() {
-        return this.bannerRepository.findAll()
+        return this.bannerRepository.findAllByOrderByBannerCreatedAtDesc()
                 .stream()
                 .map(this.bannerMapper::toBannerResponse)
                 .toList();
@@ -56,6 +57,7 @@ public class BannerService {
                     bannerRequest.getBannerImage().getContentType());
             Banner banner = this.bannerMapper.toBanner(bannerRequest);
             banner.setBannerImageId(bannerImageId);
+            banner.setBannerCreatedAt(LocalDateTime.now());
 
             Banner savedBanner = bannerRepository.save(banner);
 

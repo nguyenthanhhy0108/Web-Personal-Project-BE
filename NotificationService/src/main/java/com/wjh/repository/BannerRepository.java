@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface BannerRepository extends MongoRepository<Banner,String> {
-
+    List<Banner> findAllByOrderByBannerCreatedAtDesc();
 }

@@ -18,7 +18,7 @@ public class Vehicle {
 
     private String vehicleName;
     private String vehicleDescription;
-    private String vehiclePrice;
+    private long vehiclePrice;
     private String vehicleImageUrl;
     private int numberOfRemaining;
 

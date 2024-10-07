@@ -1,0 +1,30 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: search-service
+#  data:
+#    mongodb:
+#      uri: mongodb://admin:admin@localhost:3303/notification-service?authSource=admin
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+    username: "root"
+    password: "0941609091Th@"
+
+
+identity-provider:
+  url: localhost:8180
+  client-id: personal-project
+  client-secret: bT4quORZtOYaCLmGP4ccCIMaRkA5gCJj
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka:password@${eureka.instance.hostname}:8761/eureka/

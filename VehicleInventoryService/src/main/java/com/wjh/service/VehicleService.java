@@ -121,4 +121,9 @@ public class VehicleService {
                     .stream().map(this.vehicleMapper::toVehicleResponse).toList();
         }
     }
+
+    public List<String> getAllVehicleNames() {
+        List<Vehicle> vehicles = vehicleRepository.findAll();
+        return vehicles.stream().map(Vehicle::getVehicleName).toList();
+    }
 }

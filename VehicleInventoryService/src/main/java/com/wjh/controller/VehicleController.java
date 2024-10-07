@@ -28,7 +28,8 @@ public class VehicleController {
 
     @PostMapping("/vehicles")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ApiResponse<VehicleWithBrandResponse>> createVehicle(@RequestBody @Valid VehicleCreationRequest vehicleCreationRequest) {
+    public ResponseEntity<ApiResponse<VehicleWithBrandResponse>> createVehicle(
+            @RequestBody @Valid VehicleCreationRequest vehicleCreationRequest) {
         return ResponseEntity.ok(ApiResponse.<VehicleWithBrandResponse>builder()
                 .data(this.vehicleService.saveVehicle(vehicleCreationRequest))
                 .build());
@@ -37,7 +38,8 @@ public class VehicleController {
 
     @PutMapping("/vehicles/amount")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<ApiResponse<VehicleWithBrandResponse>> changeVehicleAmount(@RequestBody @Valid ChangeVehicleAmountRequest changeVehicleAmountRequest) {
+    public ResponseEntity<ApiResponse<VehicleWithBrandResponse>> changeVehicleAmount(
+            @RequestBody @Valid ChangeVehicleAmountRequest changeVehicleAmountRequest) {
         return ResponseEntity.ok(ApiResponse.<VehicleWithBrandResponse>builder()
                 .data(this.vehicleService.changeAmountOfVehicle(changeVehicleAmountRequest))
                 .build());
@@ -62,7 +64,8 @@ public class VehicleController {
 
     @GetMapping("/vehicles/{brandName}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<ApiResponse<List<VehicleWithBrandResponse>>> getAllVehicleOfBrand(@PathVariable @NotBlank String brandName) {
+    public ResponseEntity<ApiResponse<List<VehicleWithBrandResponse>>> getAllVehicleOfBrand(
+            @PathVariable @NotBlank String brandName) {
         return ResponseEntity.ok(ApiResponse.<List<VehicleWithBrandResponse>>builder()
                 .data(this.vehicleService.getAllVehiclesByBrandName(brandName))
                 .build());
@@ -73,5 +76,13 @@ public class VehicleController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAllVehicleOfBrand(@RequestParam("brand") @NotBlank String brandName) {
         this.vehicleService.deleteAllVehiclesByBrandName(brandName);
+    }
+
+
+    @GetMapping("/vehicles/names")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ApiResponse<List<String>>> getAllVehicleNames() {
+        return ResponseEntity.ok(
+                ApiResponse.<List<String>>builder().data(this.vehicleService.getAllVehicleNames()).build());
     }
 }

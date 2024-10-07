@@ -20,8 +20,7 @@ public class VehicleCreationRequest {
     @NotBlank(message = "BLANK_VEHICLE_DESCRIPTION")
     private String vehicleDescription;
     @NotNull
-    @NotBlank(message = "BLANK_VEHICLE_PRICE")
-    private String vehiclePrice;
+    private long vehiclePrice;
     @NotNull
     @NotBlank(message = "BLANK_VEHICLE_IMAGE")
     private String vehicleImageUrl;
