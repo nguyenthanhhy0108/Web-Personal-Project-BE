@@ -85,4 +85,25 @@ public class VehicleController {
         return ResponseEntity.ok(
                 ApiResponse.<List<String>>builder().data(this.vehicleService.getAllVehicleNames()).build());
     }
+
+
+    @GetMapping("/vehicles/{brandName}/names")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ApiResponse<List<String>>> getAllVehicleNamesOfBrand(
+            @PathVariable @NotBlank String brandName) {
+        return ResponseEntity.ok(
+                ApiResponse.<List<String>>builder()
+                        .data(this.vehicleService.getAllVehicleNamesOfBrandName(brandName))
+                        .build());
+    }
+
+
+    @GetMapping("/vehicles/{vehicleName}/brand")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ApiResponse<String>> getBrandNameByVehicleName(
+            @PathVariable @NotBlank String vehicleName) {
+        return ResponseEntity.ok(ApiResponse.<String>builder()
+                        .data(this.vehicleService.getVehicleBrandNameByVehicleName(vehicleName))
+                .build());
+    }
 }

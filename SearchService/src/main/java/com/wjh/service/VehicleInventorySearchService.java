@@ -1,6 +1,8 @@
 package com.wjh.service;
 
 import com.wjh.dto.response.ApiResponse;
+import com.wjh.exception.AppException;
+import com.wjh.exception.ErrorCode;
 import com.wjh.repository.VehicleInventoryClient;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +49,26 @@ public class VehicleInventorySearchService {
         }
         return vehicleNames.stream().filter(vehicleName ->
                 vehicleName.toLowerCase().contains(typedString.toLowerCase())).toList();
+    }
+
+    public List<String> getAllVehicleNamesOfBrand(String brandName) {
+        ResponseEntity<ApiResponse<List<String>>> vehicleNamesOfBrand =
+                this.vehicleInventoryClient.getAllVehicleNamesOfBrand(brandName);
+        return Objects.requireNonNull(vehicleNamesOfBrand.getBody()).getData();
+    }
+
+    public List<String> recommendVehicleNamesOfBrand(String brandName, String typedString) {
+        if (brandName == null) {
+            throw new AppException(ErrorCode.BRAND_NAME_IS_MISSING);
+        } else {
+            if (typedString == null) {
+                return null;
+            }
+            else {
+                List<String> vehicleNames = getAllVehicleNamesOfBrand(brandName);
+                return vehicleNames.stream().filter(name ->
+                        name.toLowerCase().contains(typedString.toLowerCase())).toList();
+            }
+        }
     }
 }

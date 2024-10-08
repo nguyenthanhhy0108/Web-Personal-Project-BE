@@ -38,4 +38,16 @@ public class SearchController {
                 .data(this.vehicleInventorySearchService.recommendVehicleNames(typedString))
                 .build());
     }
+
+
+    @GetMapping("/vehicles/{brandName}/{typedString}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ApiResponse<List<String>>> recommendVehicleNamesOfBrand(
+            @PathVariable @NotBlank @NotNull String brandName,
+            @PathVariable @NotBlank @NotNull String typedString) {
+        return ResponseEntity.ok(ApiResponse.<List<String>>builder()
+                .data(this.vehicleInventorySearchService
+                        .recommendVehicleNamesOfBrand(brandName.toLowerCase(), typedString))
+                .build());
+    }
 }

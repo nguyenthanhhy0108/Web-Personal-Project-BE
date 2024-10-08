@@ -8,15 +8,8 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum ErrorCode {
     UNCATEGORIZED_EXCEPTION(9999, "Uncategorized error", HttpStatus.INTERNAL_SERVER_ERROR),
-    SAVE_BANNER_FAIL(9023, "Persisting banner fail", HttpStatus.INTERNAL_SERVER_ERROR),
-    IMAGE_NOT_EXISTED(9024, "Image not exist", HttpStatus.INTERNAL_SERVER_ERROR),
-    DELETING_ERROR(9025, "Deleting error", HttpStatus.INTERNAL_SERVER_ERROR),
-    BLANK_BANNER_TITLE(9026, "Banner title must not a blank", HttpStatus.BAD_REQUEST),
-    BLANK_BANNER_DESCRIPTION(9027, "Banner description must not a blank", HttpStatus.BAD_REQUEST),
-    BLANK_BANNER_URL(9028, "Banner url must not a blank", HttpStatus.BAD_REQUEST),
-    BLANK_USERNAME(9029, "Username must not a blank", HttpStatus.BAD_REQUEST),
-    BLANK_PASSWORD(9030, "Password must not a blank", HttpStatus.BAD_REQUEST),
-    RETRIEVE_EMAILS_FAIL(9031, "An error occur when retrieve all emails", HttpStatus.INTERNAL_SERVER_ERROR),
+    BRAND_NAME_IS_MISSING(9032, "Brand name is missing", HttpStatus.BAD_REQUEST),
+    URL_PROBLEM(9033, "URL problem", HttpStatus.BAD_REQUEST),
 
     ;
 

@@ -126,4 +126,17 @@ public class VehicleService {
         List<Vehicle> vehicles = vehicleRepository.findAll();
         return vehicles.stream().map(Vehicle::getVehicleName).toList();
     }
+
+    public List<String> getAllVehicleNamesOfBrandName(String brandName) {
+        List<VehicleWithBrandResponse> vehicleResponses = this.getAllVehiclesByBrandName(brandName);
+        return vehicleResponses.stream().map(VehicleWithBrandResponse::getVehicleName).toList();
+    }
+
+    public VehicleWithBrandResponse getVehicleByVehicleName(String vehicleName) {
+        return this.vehicleMapper.toVehicleResponse(this.vehicleRepository.findByVehicleName(vehicleName));
+    }
+
+    public String getVehicleBrandNameByVehicleName(String vehicleName) {
+        return this.getVehicleByVehicleName(vehicleName).getBrandName();
+    }
 }
