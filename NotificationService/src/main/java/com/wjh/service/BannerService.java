@@ -20,6 +20,9 @@ import org.springframework.data.mongodb.gridfs.GridFsOperations;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,8 +51,14 @@ public class BannerService {
     }
 
 
+    @PreAuthorize("hasAuthority('STAFF')")
     @Transactional
     public BannerResponse saveBanner(BannerRequest bannerRequest) throws IOException {
+
+        System.out.println(SecurityContextHolder.getContext());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        log.info("Authorities: " + authentication.getAuthorities());
+
         try {
             ObjectId bannerImageId = gridFsTemplate.store(
                     bannerRequest.getBannerImage().getInputStream(),
@@ -117,6 +126,7 @@ public class BannerService {
 
 
     @Transactional
+    @PreAuthorize("hasAuthority('STAFF')")
     public void deleteBanner(String bannerId) {
         Banner banner = bannerRepository.findById(bannerId)
                 .orElseThrow(() -> new AppException(ErrorCode.IMAGE_NOT_EXISTED));

@@ -7,12 +7,11 @@ spring:
 #  data:
 #    mongodb:
 #      uri: mongodb://admin:admin@localhost:3303/notification-service?authSource=admin
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-
-    username: "root"
-    password: "0941609091Th@"
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/realms/wjh-project
 
 
 identity-provider:

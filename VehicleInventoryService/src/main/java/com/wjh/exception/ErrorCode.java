@@ -20,6 +20,7 @@ public enum ErrorCode {
     BLANK_VEHICLE_DESCRIPTION(9020, "Vehicle description can not a blank", HttpStatus.BAD_REQUEST),
     DELETING_ERROR(9021, "Deleting error", HttpStatus.INTERNAL_SERVER_ERROR),
     FOREIGN_KEY_ERROR(9022, "An error relate to foreign key", HttpStatus.BAD_REQUEST),
+    UNAUTHORIZED(9998, "You do not have enough permission", HttpStatus.FORBIDDEN),
     ;
 
     private final int code;

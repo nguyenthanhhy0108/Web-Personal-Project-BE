@@ -22,6 +22,10 @@ public class GlobalExceptionHandler {
     private static final String MIN_ATTRIBUTE = "min";
     private static final String MAX_ATTRIBUTE = "max";
 
+    private final Map<String, ErrorCode> errorMessageMap = Map.of(
+            "Access Denied", ErrorCode.UNAUTHORIZED
+    );
+
     @ExceptionHandler(value = AppException.class)
     public ResponseEntity<ApiResponse<?>> handleAppException(AppException exception) {
         ErrorCode errorCode = exception.getErrorCode();
@@ -37,6 +41,11 @@ public class GlobalExceptionHandler {
         ApiResponse<?> apiResponse = new ApiResponse<>();
 
         log.info(exception.getMessage());
+        if (errorMessageMap.containsKey(exception.getMessage())) {
+            apiResponse.setCode(errorMessageMap.get(exception.getMessage()).getCode());
+            apiResponse.setMessage(errorMessageMap.get(exception.getMessage()).getMessage());
+            return ResponseEntity.badRequest().body(apiResponse);
+        }
 
         apiResponse.setCode(ErrorCode.UNCATEGORIZED_EXCEPTION.getCode());
         apiResponse.setMessage(ErrorCode.UNCATEGORIZED_EXCEPTION.getMessage());

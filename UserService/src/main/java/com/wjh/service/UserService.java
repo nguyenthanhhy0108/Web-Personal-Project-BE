@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -78,7 +80,12 @@ public class UserService {
         return splittedString[splittedString.length - 1];
     }
 
+
+    @PreAuthorize("hasAuthority('STAFF')")
     public List<String> findAllNecessaryEmail() {
+
+        System.out.println(SecurityContextHolder.getContext());
+
         List<String> profileIdList = this.userSettingService.findAllNotifyTrueAndActiveTrueProfileId();
         List<Profile> profiles = this.profileRepository.findByProfileIDIn(profileIdList);
         return profiles.stream().map(Profile::getEmail).toList();

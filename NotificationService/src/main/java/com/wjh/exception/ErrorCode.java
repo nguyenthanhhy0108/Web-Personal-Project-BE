@@ -17,6 +17,7 @@ public enum ErrorCode {
     BLANK_USERNAME(9029, "Username must not a blank", HttpStatus.BAD_REQUEST),
     BLANK_PASSWORD(9030, "Password must not a blank", HttpStatus.BAD_REQUEST),
     RETRIEVE_EMAILS_FAIL(9031, "An error occur when retrieve all emails", HttpStatus.INTERNAL_SERVER_ERROR),
+    UNAUTHORIZED(9998, "You do not have enough permission", HttpStatus.FORBIDDEN),
 
     ;
 

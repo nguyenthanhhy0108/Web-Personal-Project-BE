@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +29,7 @@ public class VehicleService {
     private final VehicleMapper vehicleMapper;
 
     @Transactional
+    @PreAuthorize("hasAuthority('STAFF')")
     public void deleteAllVehiclesByBrandName(String brandName) {
         VehicleBrand vehicleBrand = vehicleBrandRepository.findByBrandName(brandName);
         if (vehicleBrand == null) {
@@ -43,6 +45,7 @@ public class VehicleService {
     }
 
     @Transactional
+    @PreAuthorize("hasAuthority('STAFF')")
     public VehicleWithBrandResponse saveVehicle(VehicleCreationRequest vehicleRequest) {
         VehicleBrand vehicleBrand = null;
 
@@ -69,6 +72,7 @@ public class VehicleService {
 
 
     @Transactional
+    @PreAuthorize("hasAuthority('STAFF')")
     public VehicleWithBrandResponse changeAmountOfVehicle(ChangeVehicleAmountRequest changeVehicleAmountRequest) {
         String vehicleBrand;
         Vehicle vehicle = vehicleRepository.findByVehicleName(changeVehicleAmountRequest.getVehicleName());
@@ -90,6 +94,7 @@ public class VehicleService {
 
 
     @Transactional
+    @PreAuthorize("hasAuthority('STAFF')")
     public void deleteVehicle(String vehicleId) {
         Vehicle vehicle = vehicleRepository.findByVehicleId(vehicleId);
         if (vehicle == null) {
