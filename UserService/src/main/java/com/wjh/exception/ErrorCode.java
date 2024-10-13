@@ -15,6 +15,11 @@ public enum ErrorCode {
     INVALID_DOB(9005, "Your age must be at least {min}", HttpStatus.BAD_REQUEST),
     INVALID_USERNAME(9006, "Your username must be between {min} and {max} characters", HttpStatus.BAD_REQUEST),
     INVALID_PASSWORD(9007, "Your password must be between {min} and {max} characters", HttpStatus.BAD_REQUEST),
+    USERNAME_EMAIL_NOT_MATCH(9037, "Email and username not match", HttpStatus.BAD_REQUEST),
+    REQUEST_MUST_NOT_A_BLANK(9038, "Request must not a blank", HttpStatus.BAD_REQUEST),
+    WRONG_VERIFICATION_CODE(9039, "Invalid verification code", HttpStatus.BAD_REQUEST),
+    EXPIRED_VERIFICATION_CODE(9040, "Expiry verification code", HttpStatus.BAD_REQUEST),
+
     ;
 
     private final int code;

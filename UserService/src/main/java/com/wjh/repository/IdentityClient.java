@@ -2,14 +2,13 @@ package com.wjh.repository;
 
 import com.wjh.dto.request.identity.ClientTokenExchangeParam;
 import com.wjh.dto.request.identity.UserCreationParam;
+import com.wjh.dto.request.identity.UserResetPasswordParam;
 import com.wjh.dto.response.identity.ClientTokenExchangeResponse;
 import feign.QueryMap;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "identity-client", url = "${identity-provider.url}")
 public interface IdentityClient {
@@ -21,4 +20,10 @@ public interface IdentityClient {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<?> createUserKeyCloak(@RequestHeader("authorization") String token,
                                          @RequestBody UserCreationParam userCreationParam);
+
+    @PutMapping(value = "/admin/realms/wjh-project/users/{userId}/reset-password",
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<?> userResetPassword(@RequestHeader("authorization") String token,
+                                         @PathVariable String userId,
+                                         @RequestBody UserResetPasswordParam userResetPasswordParam);
 }

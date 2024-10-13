@@ -24,6 +24,7 @@ public class SecurityConfiguration {
     private final String[] freeResourceUrls = {
             "/app/**",
             "/user/profiles",
+            "/user/reset-password/**"
     };
 
     @Bean

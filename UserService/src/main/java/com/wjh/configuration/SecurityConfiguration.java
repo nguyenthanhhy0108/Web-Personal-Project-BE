@@ -17,10 +17,6 @@ import org.springframework.web.filter.CorsFilter;
 @EnableMethodSecurity
 public class SecurityConfiguration {
 
-    private final String[] freeResourceUrls = {
-        "/user/profiles"
-    };
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
@@ -28,7 +24,8 @@ public class SecurityConfiguration {
         // Authorization rules
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/eureka/**").permitAll()
-                .requestMatchers(freeResourceUrls).permitAll()
+                .requestMatchers("/user/profiles").permitAll()
+                .requestMatchers("/user/reset-password/**").permitAll()
                 .anyRequest().authenticated()
                 );
         http.oauth2ResourceServer(oauth2 -> oauth2.jwt(

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-@FeignClient(name = "user-service",  configuration = FeignClientInterceptor.class)
+@FeignClient(name = "user-service", configuration = FeignClientInterceptor.class)
 public interface UserConnectionClient {
     @GetMapping(value = "/user/emails")
     ResponseEntity<ApiResponse<List<String>>> getAllNecessaryEmails();

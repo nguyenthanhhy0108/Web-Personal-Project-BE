@@ -5,6 +5,7 @@ import com.wjh.dto.request.CredentialsRequest;
 import com.wjh.dto.template.AccountEmailStructure;
 import com.wjh.dto.template.AnnouncementEmailStructure;
 import com.wjh.dto.template.EmailTemplate;
+import com.wjh.dto.template.VerificationCodeEmailStructure;
 import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @Slf4j
@@ -41,7 +43,7 @@ public class MailSenderService {
         }catch (Exception exception){
             log.error(exception.getMessage());
         }
-        sender.send(message);
+        CompletableFuture.runAsync(() -> sender.send(message));
     }
 
 
@@ -60,5 +62,14 @@ public class MailSenderService {
                 bannerRequest.getBannerUrl());
 
         this.sendEmail(toEmail, announcementEmailStructure);
+    }
+
+
+    public void sendVerificationEmail(String toEmail, String verificationCode) {
+        VerificationCodeEmailStructure verificationCodeEmailStructure =
+                new VerificationCodeEmailStructure();
+
+        verificationCodeEmailStructure.replaceCode(verificationCode);
+        this.sendEmail(toEmail, verificationCodeEmailStructure);
     }
 }

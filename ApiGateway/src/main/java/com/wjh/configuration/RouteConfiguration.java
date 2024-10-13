@@ -70,15 +70,15 @@ public class RouteConfiguration {
 
     @Bean
     public RouterFunction<ServerResponse> fallbackRoutes() {
-        return route("fallback-route")
-                .GET("/fallback-route", request -> ServerResponse
-                        .status(HttpStatus.SERVICE_UNAVAILABLE)
-                        .body(
-                                ApiResponse.<String>builder()
-                                        .code(ErrorCode.SERVICE_UNAVAILABLE.getCode())
-                                        .data(ErrorCode.SERVICE_UNAVAILABLE.getMessage())
-                                        .build()
-                        ))
-                .build();
+        return RouterFunctions
+                .route(RequestPredicates.path("/fallback-route"),
+                        request -> ServerResponse
+                                .status(HttpStatus.SERVICE_UNAVAILABLE)
+                                .body(
+                                        ApiResponse.<String>builder()
+                                                .code(ErrorCode.SERVICE_UNAVAILABLE.getCode())
+                                                .data(ErrorCode.SERVICE_UNAVAILABLE.getMessage())
+                                                .build()
+                                ));
     }
 }
