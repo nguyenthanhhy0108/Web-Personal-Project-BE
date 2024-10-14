@@ -19,6 +19,7 @@ public enum ErrorCode {
     REQUEST_MUST_NOT_A_BLANK(9038, "Request must not a blank", HttpStatus.BAD_REQUEST),
     WRONG_VERIFICATION_CODE(9039, "Invalid verification code", HttpStatus.BAD_REQUEST),
     EXPIRED_VERIFICATION_CODE(9040, "Expiry verification code", HttpStatus.BAD_REQUEST),
+    USERNAME_NOT_EXIST(9041, "Username not exist", HttpStatus.BAD_REQUEST),
 
     ;
 

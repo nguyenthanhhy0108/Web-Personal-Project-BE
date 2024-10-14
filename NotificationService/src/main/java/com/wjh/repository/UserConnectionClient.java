@@ -1,5 +1,6 @@
 package com.wjh.repository;
 
+import com.wjh.configuration.FeignClientInterceptor;
 import com.wjh.dto.response.ApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;

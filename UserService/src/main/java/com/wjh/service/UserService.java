@@ -121,7 +121,10 @@ public class UserService {
         LocalDateTime expiryDate = LocalDateTime.now().plusMinutes(30);
 
         Profile profile = this.profileRepository.findByUsername(request.getUsername());
-        if (Objects.isNull(profile) || !profile.getEmail().equalsIgnoreCase(request.getEmail())) {
+        if (Objects.isNull(profile)) {
+            throw new AppException(ErrorCode.USERNAME_NOT_EXIST);
+        }
+        if (!profile.getEmail().equalsIgnoreCase(request.getEmail())) {
             throw new AppException(ErrorCode.USERNAME_EMAIL_NOT_MATCH);
         }
 
@@ -155,6 +158,7 @@ public class UserService {
             throw new AppException(ErrorCode.EXPIRED_VERIFICATION_CODE);
         }
         try {
+            log.info(identityService.exchangeClientToken());
             identityClient.userResetPassword(
                     "Bearer " + identityService.exchangeClientToken(),
                     this.profileRepository.findByUsername(request.getUsername()).getUserID(),

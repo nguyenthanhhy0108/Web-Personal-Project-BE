@@ -1,4 +1,4 @@
-package com.wjh.repository;
+package com.wjh.configuration;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
