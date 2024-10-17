@@ -1,0 +1,38 @@
+server:
+  port: 0
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/realms/wjh-project
+  application:
+    name: order-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  data:
+    mongodb:
+      uri: mongodb://admin:admin@localhost:3303/order-service?authSource=admin
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: "root"
+    password: "0941609091Th@"
+    url: "jdbc:mysql://localhost:6606/ORDER_SERVICE?useSSL=false&serverTimezone=UTC"
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka:password@${eureka.instance.hostname}:8761/eureka/
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

@@ -29,6 +29,7 @@
         <module>ApiGateway</module>
         <module>NotificationService</module>
         <module>SearchService</module>
+        <module>OrderService</module>
     </modules>
 
     <scm>

@@ -57,7 +57,7 @@ public class BannerService {
 
         System.out.println(SecurityContextHolder.getContext());
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        log.info("Authorities: " + authentication.getAuthorities());
+        log.info("Authorities: {}", authentication.getAuthorities());
 
         try {
             ObjectId bannerImageId = gridFsTemplate.store(

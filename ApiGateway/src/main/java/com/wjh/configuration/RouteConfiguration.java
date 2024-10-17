@@ -33,7 +33,7 @@ public class RouteConfiguration {
         return GatewayRouterFunctions.route("search-route")
                 .route(RequestPredicates.path("/search/**"), http())
                 .filter(lb("search-service"))
-                .filter(CircuitBreakerFilterFunctions.circuitBreaker("search-service",
+                .filter(CircuitBreakerFilterFunctions.circuitBreaker("circuit-breaker",
                         URI.create("forward:/fallback-route")))
                 .build();
     }
@@ -43,7 +43,7 @@ public class RouteConfiguration {
         return GatewayRouterFunctions.route("user-route")
                 .route(RequestPredicates.path("/user/**"), http())
                 .filter(lb("user-service"))
-                .filter(CircuitBreakerFilterFunctions.circuitBreaker("search-service",
+                .filter(CircuitBreakerFilterFunctions.circuitBreaker("circuit-breaker",
                         URI.create("forward:/fallback-route")))
                 .build();
     }
@@ -53,7 +53,7 @@ public class RouteConfiguration {
         return GatewayRouterFunctions.route("vehicle-inventory-route")
                 .route(RequestPredicates.path("/vehicle-inventory/**"), http())
                 .filter(lb("vehicle-inventory-service"))
-                .filter(CircuitBreakerFilterFunctions.circuitBreaker("search-service",
+                .filter(CircuitBreakerFilterFunctions.circuitBreaker("circuit-breaker",
                         URI.create("forward:/fallback-route")))
                 .build();
     }
@@ -63,7 +63,17 @@ public class RouteConfiguration {
         return GatewayRouterFunctions.route("notification-route")
                 .route(RequestPredicates.path("/notification/**"), http())
                 .filter(lb("notification-service"))
-                .filter(CircuitBreakerFilterFunctions.circuitBreaker("search-service",
+                .filter(CircuitBreakerFilterFunctions.circuitBreaker("circuit-breaker",
+                        URI.create("forward:/fallback-route")))
+                .build();
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> orderServiceRoutes() {
+        return GatewayRouterFunctions.route("order-route")
+                .route(RequestPredicates.path("/deposite-contract/**"), http())
+                .filter(lb("order-service"))
+                .filter(CircuitBreakerFilterFunctions.circuitBreaker("circuit-breaker",
                         URI.create("forward:/fallback-route")))
                 .build();
     }
