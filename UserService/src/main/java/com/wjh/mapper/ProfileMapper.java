@@ -1,7 +1,7 @@
 package com.wjh.mapper;
 
 import com.wjh.dto.request.ProfileCreationRequest;
-import com.wjh.dto.response.ProfileCreationResponse;
+import com.wjh.dto.response.ProfileResponse;
 import com.wjh.entity.Profile;
 import org.mapstruct.Mapper;
 
@@ -9,5 +9,5 @@ import org.mapstruct.Mapper;
 public interface ProfileMapper {
 
     Profile toProfile(ProfileCreationRequest profileCreationRequest);
-    ProfileCreationResponse toProfileCreationResponse(Profile profile);
+    ProfileResponse toProfileResponse(Profile profile);
 }

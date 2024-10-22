@@ -4,7 +4,7 @@ import com.wjh.dto.request.ForgotPasswordConfirmationRequest;
 import com.wjh.dto.request.ForgotPasswordRequest;
 import com.wjh.dto.request.ProfileCreationRequest;
 import com.wjh.dto.response.ApiResponse;
-import com.wjh.dto.response.ProfileCreationResponse;
+import com.wjh.dto.response.ProfileResponse;
 import com.wjh.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,15 +25,26 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/profiles")
-    public ResponseEntity<ApiResponse<ProfileCreationResponse>> createUser(
+    public ResponseEntity<ApiResponse<ProfileResponse>> createUser(
             @RequestBody @Valid ProfileCreationRequest profileCreationRequest) {
         log.info("Creating profile");
-        ProfileCreationResponse profileCreationResponse = userService.createProfile(profileCreationRequest);
-        ApiResponse<ProfileCreationResponse> apiResponse = ApiResponse.<ProfileCreationResponse>builder()
-                .data(profileCreationResponse)
+        ProfileResponse profileResponse = userService.createProfile(profileCreationRequest);
+        ApiResponse<ProfileResponse> apiResponse = ApiResponse.<ProfileResponse>builder()
+                .data(profileResponse)
                 .build();
         return ResponseEntity.ok(apiResponse);
     }
+
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/profiles/{userId}")
+    public ResponseEntity<ApiResponse<ProfileResponse>> getUserByUserId(@PathVariable String userId) {
+        log.info("Retrieving profile");
+        return ResponseEntity.ok(ApiResponse.<ProfileResponse>builder()
+                        .data(this.userService.findProfileByUserId(userId))
+                .build());
+    }
+
 
     @GetMapping("/emails")
     @ResponseStatus(HttpStatus.OK)

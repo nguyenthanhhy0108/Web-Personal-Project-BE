@@ -10,4 +10,5 @@ import java.util.List;
 public interface ProfileRepository extends JpaRepository<Profile, String> {
     List<Profile> findByProfileIDIn(List<String> profileIDs);
     Profile findByUsername(String username);
+    Profile findByUserID(String userID);
 }

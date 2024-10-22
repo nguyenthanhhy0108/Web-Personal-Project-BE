@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProfileCreationResponse {
+public class ProfileResponse {
     private String profileID;
     private String username;
     private String email;

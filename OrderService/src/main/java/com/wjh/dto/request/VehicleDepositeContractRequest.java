@@ -37,13 +37,15 @@ public class VehicleDepositeContractRequest {
     private String email;
     @NotNull
     @NotBlank(message = "BLANK_REQUEST")
+    private String idCardNumber;
+    @NotNull
+    @NotBlank(message = "BLANK_REQUEST")
     private String gender;
     @NotNull
     @DateOfBirthConstraint(min = 2, message = "INVALID_DOB")
     private LocalDate dateOfBirth;
     @NotNull
-    @Min(100)
-    private long price;
+    private String price;
     @NotNull
     private MultipartFile contractPdf;
 }

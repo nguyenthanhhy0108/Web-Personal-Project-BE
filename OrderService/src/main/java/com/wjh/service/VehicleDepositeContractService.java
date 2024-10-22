@@ -5,10 +5,13 @@ import com.wjh.dto.request.VehicleDepositeContractRequest;
 import com.wjh.dto.response.VehicleDepositeContractResponse;
 import com.wjh.entity.ContractPayment;
 import com.wjh.entity.VehicleDepositeContract;
+import com.wjh.event.OrderPlacedEvent;
 import com.wjh.exception.AppException;
 import com.wjh.exception.ErrorCode;
+import com.wjh.mapper.OrderPlacedEventMapper;
 import com.wjh.mapper.VehicleDepositeContractMapper;
 import com.wjh.repository.VehicleDepositeContractRepository;
+import com.wjh.utils.PdfUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
@@ -18,6 +21,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.gridfs.GridFsOperations;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +39,9 @@ public class VehicleDepositeContractService {
     private GridFsTemplate gridFsTemplate;
     private GridFsOperations gridFsOperations;
     private final VehicleDepositeContractMapper vehicleDepositeContractMapper;
+    private final OrderPlacedEventMapper orderPlacedEventMapper;
+    private final KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate;
+    private final PdfUtils pdfUtils;
 
 
     @Transactional
@@ -55,14 +62,26 @@ public class VehicleDepositeContractService {
             vehicleDepositeContract.setEnabled(true);
 
             ContractPayment contractPayment = new ContractPayment();
+            contractPayment.setStatus("deposited");
+
             contractPayment.setVehicleDepositeContract(vehicleDepositeContract);
 
             vehicleDepositeContract.setContractPayment(contractPayment);
 
-            VehicleDepositeContract savedBanner = this.vehicleDepositeContractRepository
+            VehicleDepositeContract savedContract = this.vehicleDepositeContractRepository
                     .save(vehicleDepositeContract);
 
-            return this.vehicleDepositeContractMapper.toVehicleDepositeContractResponse(savedBanner);
+            //Send to kafka topic
+            OrderPlacedEvent orderPlacedEvent = this.orderPlacedEventMapper.toOrderPlacedEvent(request);
+            String encodedPdf = this.pdfUtils.convertPdfToBase64(request.getContractPdf());
+            orderPlacedEvent.setEncodedContractPdf(encodedPdf);
+            orderPlacedEvent.setContractId(savedContract.getContractId());
+
+            log.info("Sending to kafka topic order-placed: {}", orderPlacedEvent);
+            kafkaTemplate.send("order-placed", orderPlacedEvent);
+            log.info("Finish sending to kafka topic order-placed: {}", orderPlacedEvent);
+
+            return this.vehicleDepositeContractMapper.toVehicleDepositeContractResponse(savedContract);
         } catch (RuntimeException | IOException e) {
             log.error(e.getMessage());
             throw new AppException(ErrorCode.SAVE_CONTRACT_FAIL);
@@ -112,4 +131,7 @@ public class VehicleDepositeContractService {
         }
         return null;
     }
+
+
+
 }

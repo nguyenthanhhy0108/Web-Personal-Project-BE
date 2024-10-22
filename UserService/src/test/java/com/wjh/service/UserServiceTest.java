@@ -2,7 +2,7 @@ package com.wjh.service;
 
 import com.wjh.dto.request.ProfileCreationRequest;
 import com.wjh.dto.request.identity.UserCreationParam;
-import com.wjh.dto.response.ProfileCreationResponse;
+import com.wjh.dto.response.ProfileResponse;
 import com.wjh.entity.Profile;
 import com.wjh.exception.AppException;
 import com.wjh.exception.ErrorCode;
@@ -27,7 +27,7 @@ public class UserServiceTest {
     @Autowired
     private UserService userService;
     private ProfileCreationRequest profileCreationRequest;
-    private ProfileCreationResponse profileCreationResponse;
+    private ProfileResponse profileResponse;
     private Profile profile;
 
     @MockBean
@@ -56,7 +56,7 @@ public class UserServiceTest {
                 .dateOfBirth(dateOfBirth)
                 .build();
 
-        profileCreationResponse = ProfileCreationResponse.builder()
+        profileResponse = ProfileResponse.builder()
                 .profileID("1e7534321183")
                 .email("test@test.uit.edu")
                 .username("unit_test_service")
@@ -87,7 +87,7 @@ public class UserServiceTest {
 
         var response = userService.createProfile(profileCreationRequest);
 
-        Assertions.assertThat(response.getProfileID()).isEqualTo(profileCreationResponse.getProfileID());
+        Assertions.assertThat(response.getProfileID()).isEqualTo(profileResponse.getProfileID());
     }
 
     @Test

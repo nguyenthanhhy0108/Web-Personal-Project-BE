@@ -25,10 +25,11 @@ public class VehicleDepositeContract {
     private String address;
     private String phoneNumber;
     private String email;
+    private String idCardNumber;
     private int age;
     private String gender;
     private LocalDate dateOfBirth;
-    private long price;
+    private String price;
     private LocalDateTime createdAt;
     private String contractPdfId;
     private boolean enabled;

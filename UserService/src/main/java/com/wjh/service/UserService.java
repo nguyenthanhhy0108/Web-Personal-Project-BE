@@ -6,7 +6,7 @@ import com.wjh.dto.request.ProfileCreationRequest;
 import com.wjh.dto.request.identity.Credential;
 import com.wjh.dto.request.identity.UserCreationParam;
 import com.wjh.dto.request.identity.UserResetPasswordParam;
-import com.wjh.dto.response.ProfileCreationResponse;
+import com.wjh.dto.response.ProfileResponse;
 import com.wjh.entity.Profile;
 import com.wjh.entity.UserSetting;
 import com.wjh.entity.UserVerifyCode;
@@ -46,7 +46,7 @@ public class UserService {
     private static final int CODE_LENGTH = 6;
     private static final SecureRandom random = new SecureRandom();
 
-    public ProfileCreationResponse createProfile(ProfileCreationRequest request) {
+    public ProfileResponse createProfile(ProfileCreationRequest request) {
         ResponseEntity<?> userCreationKeyCloakResponse;
         try {
             log.info("Bearer {}", identityService.exchangeClientToken());
@@ -83,7 +83,7 @@ public class UserService {
 
         log.info("Created user profile: {}", resultProfile.getProfileID());
 
-        return profileMapper.toProfileCreationResponse(resultProfile);
+        return profileMapper.toProfileResponse(resultProfile);
     }
 
     private String extractKeyCloakUserID(ResponseEntity<?> createKeyCloakUserResponse){
@@ -167,5 +167,11 @@ public class UserService {
             log.error(feignException.getMessage());
             throw errorNormalizer.handleKeyCloakException(feignException);
         }
+    }
+
+
+    @PreAuthorize("hasAuthority('USER')")
+    public ProfileResponse findProfileByUserId(String userId) {
+        return this.profileMapper.toProfileResponse(this.profileRepository.findByUserID(userId));
     }
 }

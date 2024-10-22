@@ -3,7 +3,7 @@ package com.wjh.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.wjh.dto.request.ProfileCreationRequest;
-import com.wjh.dto.response.ProfileCreationResponse;
+import com.wjh.dto.response.ProfileResponse;
 import com.wjh.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,7 +29,7 @@ public class UserControllerTest {
     @MockBean
     private UserService userService;
     private ProfileCreationRequest profileCreationRequest;
-    private ProfileCreationResponse profileCreationResponse;
+    private ProfileResponse profileResponse;
     private LocalDate dateOfBirth;
     @Autowired
     private MockMvc mockMvc;
@@ -46,7 +46,7 @@ public class UserControllerTest {
                 .dateOfBirth(dateOfBirth)
                 .build();
 
-        profileCreationResponse = ProfileCreationResponse.builder()
+        profileResponse = ProfileResponse.builder()
                 .profileID("1e7534321183")
                 .email("test@test.uit")
                 .username("unit_test")
@@ -62,7 +62,7 @@ public class UserControllerTest {
         objectMapper.registerModule(new JavaTimeModule());
         String content = objectMapper.writeValueAsString(profileCreationRequest);
 
-        Mockito.when(userService.createProfile(any())).thenReturn(profileCreationResponse);
+        Mockito.when(userService.createProfile(any())).thenReturn(profileResponse);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/user/create-user")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)

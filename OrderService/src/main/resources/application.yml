@@ -2,6 +2,16 @@ server:
   port: 0
 
 spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    template:
+      default-topic: order-placed
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      compression-type: gzip
+      properties:
+        max.request.size: 5242880
   security:
     oauth2:
       resourceserver:
