@@ -3,6 +3,7 @@ package com.wjh.service;
 import com.mongodb.client.gridfs.model.GridFSFile;
 import com.wjh.dto.request.VehicleDepositeContractRequest;
 import com.wjh.dto.response.VehicleDepositeContractResponse;
+import com.wjh.dto.response.VehicleWithBrandResponse;
 import com.wjh.entity.ContractPayment;
 import com.wjh.entity.VehicleDepositeContract;
 import com.wjh.event.OrderPlacedEvent;
@@ -11,6 +12,7 @@ import com.wjh.exception.ErrorCode;
 import com.wjh.mapper.OrderPlacedEventMapper;
 import com.wjh.mapper.VehicleDepositeContractMapper;
 import com.wjh.repository.VehicleDepositeContractRepository;
+import com.wjh.repository.VehicleInventoryConnectionClient;
 import com.wjh.utils.PdfUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +24,7 @@ import org.springframework.data.mongodb.gridfs.GridFsOperations;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +32,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -42,10 +46,18 @@ public class VehicleDepositeContractService {
     private final OrderPlacedEventMapper orderPlacedEventMapper;
     private final KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate;
     private final PdfUtils pdfUtils;
+    private final VehicleInventoryConnectionClient vehicleInventoryConnectionClient;
 
 
     @Transactional
     public VehicleDepositeContractResponse saveVehicleDepositeContract(VehicleDepositeContractRequest request) {
+        VehicleWithBrandResponse vehicleResponse =
+                Objects.requireNonNull(this.vehicleInventoryConnectionClient.findVehicleByBrandNameAndVehicleName(
+                        request.getBrandName(), request.getVehicleName()).getBody()).getData();
+
+        if (vehicleResponse.getNumberOfRemaining() <= 0) {
+            throw new AppException(ErrorCode.VEHICLE_OUT_OF_STOCK);
+        }
         //Save pdf
         //Save instance
         try {
@@ -81,6 +93,12 @@ public class VehicleDepositeContractService {
             kafkaTemplate.send("order-placed", orderPlacedEvent);
             log.info("Finish sending to kafka topic order-placed: {}", orderPlacedEvent);
 
+            //Change vehicle amount
+            VehicleWithBrandResponse vehicleAfter = Objects.requireNonNull(this.vehicleInventoryConnectionClient
+                    .changeVehicleAmountByDepositing(request.getBrandName(), request.getVehicleName())
+                    .getBody()).getData();
+            log.info("Vehicle after change: {}", vehicleAfter);
+
             return this.vehicleDepositeContractMapper.toVehicleDepositeContractResponse(savedContract);
         } catch (RuntimeException | IOException e) {
             log.error(e.getMessage());
@@ -99,6 +117,16 @@ public class VehicleDepositeContractService {
         } catch (RuntimeException e) {
             log.error(e.getMessage());
             throw new AppException(ErrorCode.DELETING_ERROR);
+        }
+    }
+
+
+    @Transactional
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void deleteAllVehicleDepositeContracts() {
+        List<VehicleDepositeContract> vehicleDepositeContracts = this.vehicleDepositeContractRepository.findAll();
+        for (VehicleDepositeContract vehicleDepositeContract : vehicleDepositeContracts) {
+            this.deleteVehicleDepositeContract(vehicleDepositeContract.getContractId());
         }
     }
 

@@ -28,6 +28,13 @@ public class VehicleService {
     private final VehicleBrandRepository vehicleBrandRepository;
     private final VehicleMapper vehicleMapper;
 
+    public VehicleWithBrandResponse findByBrandNameAndVehicleName(String brandName, String vehicleName) {
+        VehicleBrand vehicleBrand = this.vehicleBrandRepository.findByBrandName(brandName);
+        return this.vehicleMapper.toVehicleResponse(
+                this.vehicleRepository.findByVehicleBrandAndVehicleName(vehicleBrand, vehicleName)
+        );
+    }
+
     @Transactional
     @PreAuthorize("hasAuthority('STAFF')")
     public void deleteAllVehiclesByBrandName(String brandName) {
@@ -80,7 +87,7 @@ public class VehicleService {
             throw new AppException(ErrorCode.VEHICLE_NOT_EXIST);
         }
         else {
-            if (-changeVehicleAmountRequest.getAmount() >= vehicle.getNumberOfRemaining()) {
+            if (-changeVehicleAmountRequest.getAmount() > vehicle.getNumberOfRemaining()) {
                 throw new AppException(ErrorCode.VEHICLE_LESS_THAN_DESIRE);
             }
             vehicle.setNumberOfRemaining(vehicle.getNumberOfRemaining() + changeVehicleAmountRequest.getAmount());
@@ -143,5 +150,16 @@ public class VehicleService {
 
     public String getVehicleBrandNameByVehicleName(String vehicleName) {
         return this.getVehicleByVehicleName(vehicleName).getBrandName();
+    }
+
+    public VehicleWithBrandResponse changeVehicleByDepositing(String brandName, String vehicleName) {
+        VehicleBrand vehicleBrand = vehicleBrandRepository.findByBrandName(brandName);
+        Vehicle vehicle = this.vehicleRepository.findByVehicleBrandAndVehicleName(vehicleBrand, vehicleName);
+        if (vehicle == null) {
+            throw new AppException(ErrorCode.VEHICLE_NOT_EXIST);
+        } else {
+            vehicle.setNumberOfRemaining(vehicle.getNumberOfRemaining() - 1);
+            return vehicleMapper.toVehicleResponse(vehicleRepository.save(vehicle));
+        }
     }
 }

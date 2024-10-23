@@ -49,6 +49,13 @@ public class VehicleDepositeContractController {
     }
 
 
+    @DeleteMapping("/contracts")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAllContracts() {
+        this.vehicleDepositeContractService.deleteAllVehicleDepositeContracts();
+    }
+
+
     @GetMapping("/contracts/{contractId}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ApiResponse<VehicleDepositeContractResponse>> getContractById(@PathVariable String contractId) {

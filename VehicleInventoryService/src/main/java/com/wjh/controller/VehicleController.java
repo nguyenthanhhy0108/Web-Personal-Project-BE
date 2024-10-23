@@ -26,6 +26,26 @@ public class VehicleController {
     }
 
 
+    @GetMapping("/vehicles/{brandName}/{vehicleName}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ApiResponse<VehicleWithBrandResponse>> findByBrandNameAndVehicleName(
+            @PathVariable String brandName, @PathVariable String vehicleName) {
+        return ResponseEntity.ok(ApiResponse.<VehicleWithBrandResponse>builder()
+                        .data(this.vehicleService.findByBrandNameAndVehicleName(brandName, vehicleName))
+                .build());
+    }
+
+
+    @PutMapping("/vehicles/{brandName}/{vehicleName}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ApiResponse<VehicleWithBrandResponse>> updateVehicleByDepositing(
+            @PathVariable String brandName, @PathVariable String vehicleName) {
+        return ResponseEntity.ok(ApiResponse.<VehicleWithBrandResponse>builder()
+                        .data(this.vehicleService.changeVehicleByDepositing(brandName, vehicleName))
+                .build());
+    }
+
+
     @PostMapping("/vehicles")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ApiResponse<VehicleWithBrandResponse>> createVehicle(

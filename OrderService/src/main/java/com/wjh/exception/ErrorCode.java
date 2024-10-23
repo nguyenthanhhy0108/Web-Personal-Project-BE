@@ -16,6 +16,7 @@ public enum ErrorCode {
     SAVE_CONTRACT_FAIL(9042, "Save contract fail", HttpStatus.INTERNAL_SERVER_ERROR),
     INVALID_CONTRACT_ID(9043, "Invalid contract id", HttpStatus.INTERNAL_SERVER_ERROR),
     GET_CONTRACT_FAIL(9044, "Get contract fail", HttpStatus.INTERNAL_SERVER_ERROR),
+    VEHICLE_OUT_OF_STOCK(9045, "Vehicle out of stock", HttpStatus.INTERNAL_SERVER_ERROR),
     ;
 
     private final int code;
