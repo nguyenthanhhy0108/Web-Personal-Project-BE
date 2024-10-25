@@ -21,6 +21,7 @@ Welcome to the **WJH Project**: a comprehensive car garage platform that allows 
 - [Usage](#usage)
 - [API](#api)
 - [Application Code](#application-code)
+- [Technology](#technology-stack)
 - [Functionality](#functionality)
 - [Author](#author)
 
@@ -111,17 +112,42 @@ We also provide a dedicated file for `frontend developers`, allowing them to eas
 
 ## Functionality
 
+- All necessary CRUD.
 - Implement `OAuth2` and `JWT` for robust **authentication** and **authorization**.
 - Manage user accounts while securely storing user information.
-- Utilize `MongoDB` to store images and a variety of file types.
+- Utilize `MongoDB` to store and retrieve images and a variety of file types.
 - Send notifications and communications via `SMTP`.
 - Announce company campaigns to targeted users.
 - Search for and recommend vehicles tailored to user preferences.
 - Facilitate the deposit and storage of PDF contracts.
+- Integrate `Paypal`.
 - Detect damaged vehicle parts using a specifically trained **`AI model`**.
 - Predict vehicle pricing through a dedicated **`AI model`**.
 
+## Technology Stack
+
+- **Java Spring Boot**: Framework for building production-ready applications.
+- **Java Spring Test**: Provides support for testing Spring components with unit tests and integration tests.
+- **Java Spring Security**: Provides security features for authentication and authorization.
+- **Java Spring OAuth2 Resource Server**: Enables OAuth2 authorization for secure API access.
+- **Java Spring Data JPA**: Simplifies data access and manipulation with JPA.
+- **Java Spring Hibernate**: ORM tool for managing database operations.
+- **Java Spring MongoDB**: Integration with MongoDB for document-based data storage.
+- **Java Spring H2**: Lightweight in-memory database for development and testing.
+- **Java Spring Cloud Gateway MVC**: API gateway for routing and managing microservices.
+- **Java Eureka Discovery Server**: Service registry for locating microservices in a distributed system.
+- **MapStruct**: Code generator for mapping between Java bean types.
+- **Lombok**: Reduces boilerplate code with annotations for getters, setters, and more.
+- **Spring Cloud Feign Client**: Declarative HTTP client for seamless API calls between services.
+- **Spring Boot Mail**: Simplifies sending emails in Spring applications.
+- **Kafka**: Distributed streaming platform for building real-time data pipelines and applications.
+- **Keycloak**: Identity and access management solution for secure authentication.
+- **Resilience4J Circuit Breaker**: Implements circuit breaker patterns for resilient microservices.
 ## Author
 
-**`Nguyen Thanh Hy`**
+### Recommendation
+<i>We advise you to run our project on IntelliJ for a better experience.</i>
+
+### Signature
+**`Nguyen Thanh Hy (Won Jeong Hee)`**
 
