@@ -17,13 +17,11 @@ A car garage website where customers can deposit vehicles, buy parts, estimate c
 ## Table of Contents
 
 - [Getting Started](#getting-started)
+- [Architecture](#architecture)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Commands](#commands)
-- [Screenshots](#screenshots)
-- [Folder Structure](#folder-structure)
-- [Configuration](#configuration)
-- [Contributing](#contributing)
+- [API](#api)
+- [Application Code](#application-code)
 - [License](#license)
 
 ---
@@ -41,7 +39,12 @@ This repository relies on Java 17. Ensure you have the following installed:
 - [MySQL](https://www.mysql.com/) (for database, **for `Window`: MySQL Workbench CE is important**)
 - [MongoDB](https://www.mongodb.com/) (for database, we recommend you install `MongoDBCompass` and `MongoShell`)
 
-### Installation
+## Architecture
+
+<img src="https://github.com/nguyenthanhhy0108/Web-Personal-Project-BE/blob/main/github-image/wjh-logo.png?raw=true" alt="Project Logo" width="300"/>
+
+
+## Installation
 
 ### Clone repository
 Clone the repository and navigate into the project folder.
@@ -71,7 +74,7 @@ At `root`, run this command to build project in Maven:
 mvn clean install
 ```
 
-### Run project
+## Usage
 
 At `root`, run this command to run this project:
 
@@ -90,19 +93,19 @@ We provide Postman JSON as well as OpenAPI for developers:
 
 ### Postman JSON
 
-[Here]()
+[Here](https://github.com/nguyenthanhhy0108/Web-Personal-Project-BE/blob/main/postman.json)
 
 You can import this json for creating a new collection in Postman application.
 
 ### Open API YML
 
-[Here]()
+[Here](https://github.com/nguyenthanhhy0108/Web-Personal-Project-BE/blob/main/openAPI.yml)
 
 You can use [Swagger Editor](https://editor.swagger.io/) for visualizing this yml file.
 
 ## Application code
 
-[Here]()
+[Here](https://github.com/nguyenthanhhy0108/Web-Personal-Project-BE/blob/main/code.txt)
 
 We also provide a specific file for Front End developer, who can call these API easily.
 
