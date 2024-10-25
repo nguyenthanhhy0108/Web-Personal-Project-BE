@@ -21,7 +21,8 @@ Welcome to the **WJH Project**: a comprehensive car garage platform that allows 
 - [Usage](#usage)
 - [API](#api)
 - [Application Code](#application-code)
-- [License](#license)
+- [Functionality](#functionality)
+- [Author](#author)
 
 ---
 
@@ -108,5 +109,19 @@ You can use [Swagger Editor](https://editor.swagger.io/) for visualizing this ym
 
 We also provide a dedicated file for `frontend developers`, allowing them to easily call these APIs.
 
+## Functionality
 
+- Implement `OAuth2` and `JWT` for robust **authentication** and **authorization**.
+- Manage user accounts while securely storing user information.
+- Utilize `MongoDB` to store images and a variety of file types.
+- Send notifications and communications via `SMTP`.
+- Announce company campaigns to targeted users.
+- Search for and recommend vehicles tailored to user preferences.
+- Facilitate the deposit and storage of PDF contracts.
+- Detect damaged vehicle parts using a specifically trained **`AI model`**.
+- Predict vehicle pricing through a dedicated **`AI model`**.
+
+## Author
+
+**`Nguyen Thanh Hy`**
 
