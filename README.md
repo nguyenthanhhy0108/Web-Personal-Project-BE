@@ -23,6 +23,7 @@ Welcome to the **WJH Project**: a comprehensive car garage platform that allows 
 - [Application Code](#application-code)
 - [Technology](#technology-stack)
 - [Functionality](#functionality)
+- [Data](#data)
 - [Author](#author)
 
 ---
@@ -143,6 +144,19 @@ We also provide a dedicated file for `frontend developers`, allowing them to eas
 - **Kafka**: Distributed streaming platform for building real-time data pipelines and applications.
 - **Keycloak**: Identity and access management solution for secure authentication.
 - **Resilience4J Circuit Breaker**: Implements circuit breaker patterns for resilient microservices.
+
+## Data
+
+The vehicle data in this application is sourced from various websites and summarized into two CSV files:
+
+- `/data/translated_data.csv`
+- `/data/translated_porsche.csv`
+
+Additionally, we provide a **Jupyter Notebook** for inserting these CSV files:
+
+- `/data/initial_data.ipynb`
+
+This notebook serves as a sample code; feel free to expand upon it and customize it to suit your needs!
 ## Author
 
 ### Recommendation
