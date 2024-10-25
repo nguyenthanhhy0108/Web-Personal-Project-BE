@@ -41,7 +41,7 @@ This repository relies on Java 17. Ensure you have the following installed:
 
 ## Architecture
 
-<img src="https://github.com/nguyenthanhhy0108/Web-Personal-Project-BE/blob/main/github-image/wjh-logo.png?raw=true" alt="Project Logo" width="300"/>
+<img src="https://github.com/nguyenthanhhy0108/Web-Personal-Project-BE/blob/main/github-image/CLIENT.png?raw=true" alt="Project Logo" width="300"/>
 
 
 ## Installation
