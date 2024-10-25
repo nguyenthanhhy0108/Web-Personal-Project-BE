@@ -1,8 +1,16 @@
-# Project Name
+<div align="center">
 
-![Project Logo](./path/to/logo.png)
+# WJH Project
+**`This repository only has the back end logic`**
 
-A brief description of your project, what it does, and its main features.
+<img src="https://github.com/nguyenthanhhy0108/Web-Personal-Project-BE/blob/main/github-image/wjh-logo.png?raw=true" alt="Project Logo" width="300"/>
+
+
+</div>
+
+A car garage website where customers can deposit vehicles, buy parts, estimate car value, and access crash detection.
+
+<p></p>
 
 ---
 
@@ -22,18 +30,81 @@ A brief description of your project, what it does, and its main features.
 
 ## Getting Started
 
-This guide will help you set up the project on your local machine for development and testing purposes.
+This below guide will help you set up the project on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (v14 or above)
+This repository relies on Java 17. Ensure you have the following installed:
+- [Java](https://www.java.com/en/) (we use `java 21.0.2 2024-01-16 LTS`)
 - [Docker](https://www.docker.com/) (for containerization)
 - [Git](https://git-scm.com/) (for version control)
+- [MySQL](https://www.mysql.com/) (for database, **for `Window`: MySQL Workbench CE is important**)
+- [MongoDB](https://www.mongodb.com/) (for database, we recommend you install `MongoDBCompass` and `MongoShell`)
 
 ### Installation
 
+### Clone repository
 Clone the repository and navigate into the project folder.
 
-```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+```
+git clone https://github.com/nguyenthanhhy0108/Web-Personal-Project-BE.git
+cd Web-Personal-Project-BE
+```
+
+### Pull docker images
+
+Pull and start necessary docker containers through:
+
+Before run this command, ensure that these ports are free:
+**`2181, 9092, 29092, 8085, 8086, 3303, 8180, 6606`**
+
+```
+docker-compose up -d
+```
+
+**`After this step, make sure your MongoDB, MySQL and these pulled containers active.`**
+
+### Build maven project
+
+At `root`, run this command to build project in Maven:
+```
+mvn clean install
+```
+
+### Run project
+
+At `root`, run this command to run this project:
+
+Grant permission:
+```
+chmod +x run.sh
+```
+Run:
+```
+./run.sh
+```
+
+## API
+
+We provide Postman JSON as well as OpenAPI for developers:
+
+### Postman JSON
+
+[Here]()
+
+You can import this json for creating a new collection in Postman application.
+
+### Open API YML
+
+[Here]()
+
+You can use [Swagger Editor](https://editor.swagger.io/) for visualizing this yml file.
+
+## Application code
+
+[Here]()
+
+We also provide a specific file for Front End developer, who can call these API easily.
+
+
+

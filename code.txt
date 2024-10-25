@@ -1,1 +1,49 @@
-1000: API Successfully.
+Errors:
+9001: Username is missing
+9002: Password is missing
+9003: Username existed, please choose another one
+9004: Email existed, please choose another one
+9005: Your age must be at least {min}
+9006: Your username must be between {min} and {max} characters
+9007: Your password must be between {min} and {max} characters
+9008: Wrong credentials
+9009: Google code is invalid
+9010: Google redirect URI is invalid
+9011: Vehicle brand existed
+9012: Vehicle brand not exist
+9013: Vehicle not exist
+9014: Vehicle in inventory less than your desire
+9015: Invalid vehicle amount, at least is {min}
+9016: Brand name can not be blank
+9017: Vehicle name can not be blank
+9018: Vehicle price can not be blank
+9019: Vehicle image can not be blank
+9020: Vehicle description can not be blank
+9021: Deleting error
+9022: An error related to foreign key
+9023: Persisting banner fail
+9024: Image not exist
+9025: Deleting error
+9026: Banner title must not be blank
+9027: Banner description must not be blank
+9028: Banner URL must not be blank
+9029: Username must not be blank
+9030: Password must not be blank
+9031: An error occurred when retrieving all emails
+9032: Brand name is missing
+9033: URL problem
+9034: Invalid page parameters
+9035: Invalid page number
+9036: Invalid page size
+9037: Email and username not match
+9038: Request must not a blank
+9039: Invalid verification code
+9040: Expiry verification code
+9041: Username not exist
+9042: Save contract fail
+9043: Invalid contract id
+9044: Get contract fail
+9045: Vehicle out of stock
+9998: You do not have enough permission
+9999: Uncategorized error
+10000: Service unavailable, please try again later.

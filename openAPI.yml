@@ -1,0 +1,725 @@
+openapi: 3.0.0
+info:
+  title: App
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+components:
+  securitySchemes:
+    noauthAuth:
+      type: http
+      scheme: noauth
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /app/token:
+    post:
+      tags:
+        - App
+      summary: getAppToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: admin
+                password: admin
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user/profiles:
+    post:
+      tags:
+        - User
+      summary: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                password: test123456
+                email: test@test.uit.com
+                username: test_existed
+                firstName: Test
+                lastName: Test
+                dateOfBirth: '1990-01-01'
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user/profiles/{profileId}:
+    get:
+      tags:
+        - User
+      summary: Get user details
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: profileId
+          in: path
+          required: true
+          description: ID of the user profile
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user/emails:
+    get:
+      tags:
+        - User
+      summary: getAllActiveEmail
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /vehicle-inventory/brands:
+    get:
+      tags:
+        - Vehicle Inventory
+      summary: getAllBrand
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Vehicle Inventory
+      summary: saveBrand
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                brandName: test
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /vehicle-inventory/vehicles/{brand-name}/{raw-vehicle-name}:
+    get:
+      tags:
+        - Vehicle Inventory
+      summary: getVehicleByBrandNameAndVehicleName
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: raw-vehicle-name
+          in: path
+          required: true
+          description: Vehicle name
+          schema:
+            type: string
+        - name: brand-name
+          in: path
+          required: true
+          description: Brand name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /vehicle-inventory/vehicles:
+    get:
+      tags:
+        - Vehicle Inventory
+      summary: getAllVehicle
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Vehicle Inventory
+      summary: saveVehicle
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                vehicleName: Land Cruiser
+                vehiclePrice: '999'
+                vehicleImageUrl: cant find
+                numberOfRemaining: 1
+                vehicleBrandName: Toyota
+                vehicleDescription: ABC
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Vehicle Inventory
+      summary: deleteAllVehicleOfBrand
+      parameters:
+        - name: brand
+          in: query
+          schema:
+            type: string
+          example: vinfast
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /vehicle-inventory/vehicles/{brand-name}:
+    get:
+      tags:
+        - Vehicle Inventory
+      summary: getAllVehicleOfBrand
+      parameters:
+        - name: brand-name
+          in: path
+          required: true
+          description: Brand name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /vehicle-inventory/vehicles/amount:
+    put:
+      tags:
+        - Vehicle Inventory
+      summary: changeVehicleAmount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                vehicleName: ALPHARD
+                amount: -1
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /vehicle-inventory/vehicles/{vehicle-id}:
+    delete:
+      tags:
+        - Vehicle Inventory
+      summary: deleteVehicle
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: vehicle-id
+          in: path
+          required: true
+          description: Vehicle ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /vehicle-inventory/brands/{brand-name}:
+    delete:
+      tags:
+        - Vehicle Inventory
+      summary: deleteBrand
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: brand-name
+          in: path
+          required: true
+          description: Brand name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /notification/banners:
+    get:
+      tags:
+        - Notification
+      summary: getAllBanner
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Notification
+      summary: saveBanner
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                bannerTitle:
+                  type: string
+                  example: Discounting campain in 2024
+                bannerDescription:
+                  type: string
+                  example: An announcement about our Discounting campain in 2024
+                bannerUrl:
+                  type: string
+                  example: http://example.com
+                bannerImage:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /notification/banners/{banner-id}:
+    delete:
+      tags:
+        - Notification
+      summary: deleteBanner
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: banner-id
+          in: path
+          required: true
+          description: Banner ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /notification/banners/image/{banner-id}:
+    get:
+      tags:
+        - Notification
+      summary: getBannerImgById
+      parameters:
+        - name: banner-id
+          in: path
+          required: true
+          description: Banner ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /notification/email/{email}:
+    post:
+      tags:
+        - Notification
+      summary: sendAccountMail
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: 12345235235235dsadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                password: 123452352352aaaaaaaaaaaaaaa35aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: email
+          in: path
+          required: true
+          description: Email
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /actuator/health:
+    get:
+      tags:
+        - Health
+      summary: circuitBreaker
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /vehicle-inventory/brands/names:
+    get:
+      tags:
+        - Notification
+      summary: getBrandNames
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /vehicle-inventory/vehicles/names:
+    get:
+      tags:
+        - Notification
+      summary: getVehicleNames
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /search/vehicles/{part-of-vehicle-name}:
+    get:
+      tags:
+        - Search
+      summary: recommendVehicleNames
+      parameters:
+        - name: part-of-vehicle-name
+          in: path
+          required: true
+          description: Part of vehicle name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /search/brands/{part-of-brand-name}:
+    get:
+      tags:
+        - Search
+      summary: recommendBrandNames
+      parameters:
+        - name: part-of-brand-name
+          in: path
+          required: true
+          description: Part of brand name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /search/vehicles/{brand-name}/{part-of-vehicle-name}:
+    get:
+      tags:
+        - Search
+      summary: Recommend vehicle names by brand name
+      parameters:
+        - name: brand-name
+          in: path
+          required: true
+          description: Brand name
+          schema:
+            type: string
+        - name: part-of-vehicle-name
+          in: path
+          required: true
+          description: Part of vehicle name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /vehicle-inventory/vehicles/{vehicle-name}/brand:
+    get:
+      tags:
+        - Vehicle Inventory
+      summary: findBrandNameByVehicleName
+      parameters:
+        - name: vehicle-name
+          in: path
+          required: true
+          description: Vehicle ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /search/vehicles:
+    post:
+      tags:
+        - Search
+      summary: getRelevantVehicles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                brandName: a
+                carName: a
+                pageNumber: 1
+                pageSize: 12
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user/reset-password/verify:
+    post:
+      tags:
+        - User
+      summary: sendAndSaveVerificationCode
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: 22520593@gm.uit.edu.vn
+                username: testsystem1
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user/reset-password/confirm:
+    post:
+      tags:
+        - User
+      summary: confirmVerificationCode
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                code: 3ubXWP
+                email: 22520593@gm.uit.edu.vn
+                username: testsystem1
+                newPassword: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /deposite-contract/contracts:
+    post:
+      tags:
+        - Order
+      summary: saveContract
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                brandName:
+                  type: string
+                  example: toyota
+                vehicleName:
+                  type: string
+                  example: ALPHARD
+                name:
+                  type: string
+                  example: Hy Hy
+                address:
+                  type: string
+                  example: a
+                phoneNumber:
+                  type: integer
+                  example: '0941609091'
+                email:
+                  type: string
+                  example: nguyenthanhhy2004@gmail.com
+                gender:
+                  type: string
+                  example: male
+                dateOfBirth:
+                  type: string
+                  example: '1990-01-01'
+                price:
+                  type: integer
+                  example: '1'
+                contractPdf:
+                  type: string
+                  format: binary
+                idCardNumber:
+                  type: string
+                  example: aaaaaaaaaaa
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Order
+      summary: deleteAllContracts
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /deposite-contract/contracts/email:
+    post:
+      tags:
+        - Order
+      summary: announceContract
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: aaa
+                email:
+                  type: string
+                  example: nguyenthanhhy2004@gmail.com
+                contractPdf:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /deposite-contract/contracts/pdf/{contract-pdf-id}:
+    get:
+      tags:
+        - Order
+      summary: getContractPdf
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: contract-pdf-id
+          in: path
+          required: true
+          description: Contract PDF ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /deposite-contract/contracts/{contract-id}:
+    get:
+      tags:
+        - Order
+      summary: getContractById
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: contract-id
+          in: path
+          required: true
+          description: Contract ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Order
+      summary: deleteContractById
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: contract-id
+          in: path
+          required: true
+          description: Contract ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /deposite-contract/contracts/email/{email}:
+    get:
+      tags:
+        - Order
+      summary: getAllContractsByEmail
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: email
+          in: path
+          required: true
+          description: Email
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /vehicle-inventory/vehicles/{brand-name}/{vehicle-name}:
+    put:
+      tags:
+        - Vehicle Inventory
+      summary: changeVehicleAmountByDepositing
+      requestBody:
+        content: {}
+      parameters:
+        - name: brand-name
+          in: path
+          required: true
+          description: Brand name
+          schema:
+            type: string
+        - name: vehicle-name
+          in: path
+          required: true
+          description: vehicle-name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

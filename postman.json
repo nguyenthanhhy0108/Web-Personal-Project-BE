@@ -1,0 +1,1501 @@
+{
+  "info": {
+    "_postman_id": "a979bb2a-cb3e-4bea-9307-2e96bc1ea827",
+    "name": "App",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32763789"
+  },
+  "item": [
+    {
+      "name": "getAppToken",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/app/token",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "app",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "createUser",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"password\":\"test123456\",\r\n    \"email\":\"test@test.uit.com\",\r\n    \"username\":\"test_existed\",\r\n    \"firstName\":\"Test\",\r\n    \"lastName\":\"Test\",\r\n    \"dateOfBirth\":\"1990-01-01\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/user/profiles",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "user",
+            "profiles"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getUserDetails",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5WEZTMm9Oc3FtR0pObDlpVVYyTllTcHB0RzBrdWNSNDQtTXZGWTR3MzI4In0.eyJleHAiOjE3MjkzNjgzMzEsImlhdCI6MTcyOTM1NzUzMSwianRpIjoiMDNjMjc4N2MtZDBlOC00ODc3LTg3MDQtNjA5MDM4ZjE3ZDFlIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy93amgtcHJvamVjdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmMWFmM2I0YS0wMDM3LTRlOWUtODU0NS1iMjA4MDA2ZmY4ZTEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwZXJzb25hbC1wcm9qZWN0Iiwic2lkIjoiMGI5YjZhZWYtYTMyOS00MTU3LThmZjYtYjgxYTY4NzA4Y2MyIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXdqaC1wcm9qZWN0IiwiQ0hBTkdFX0NBUl9JTkZPUk1BVElPTiIsIm9mZmxpbmVfYWNjZXNzIiwiU1RBRkYiLCJERUxFVEVfQ0FSIiwidW1hX2F1dGhvcml6YXRpb24iLCJBRE1JTiIsIlVTRVIiLCJWSUVXIiwiQUREX0NBUiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.bK_XDztIZxFXERbpAKx6NojTXZZmrGAdJZSArjx18hs5buu9sqG07lzdHeJPuZ-B8dCiopuKEDr7nZtrxgClqFRHdNSQUfg9UgUH0hZjhvu46w7pWNZ5Zo5wyARrW8H6dsUwPwILA9A6J_lrkLURdAsZVc7XJxcKBkyLIz8NqcMBkmrmI7MsrZrhSyjaXw60XYNwKVb_btWPk6rymjAhW3jGUHTUo2w-jfXyUtfqnxMSjaXwVFpYqI9H52QgFTlAZ5-LBR2j7IQCpfz4uf96PxeXrE7sNFaSQ1CqO7XuTRW5uLKRnt5jDwWljXoYulUuI9DhSASbxZ3njKOXdLasOA",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"password\":\"test123456\",\r\n    \"email\":\"test@test.uit.com\",\r\n    \"username\":\"test_existed\",\r\n    \"firstName\":\"Test\",\r\n    \"lastName\":\"Test\",\r\n    \"dateOfBirth\":\"1990-01-01\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/user/profiles/7a12b7b7-a191-4fd4-80cd-27ba1ba67e99",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "user",
+            "profiles",
+            "7a12b7b7-a191-4fd4-80cd-27ba1ba67e99"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getAllActiveEmail",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5WEZTMm9Oc3FtR0pObDlpVVYyTllTcHB0RzBrdWNSNDQtTXZGWTR3MzI4In0.eyJleHAiOjE3Mjg2Mjc5ODcsImlhdCI6MTcyODYxNzE4NywianRpIjoiMWNkZWVhNTEtMDE1OC00YTQwLTlhYjItM2Q3MTRjMmYwNmUyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy93amgtcHJvamVjdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIyZWEzNzY1NS1jOTk4LTQ3YjAtYWU4Ny1mNThkYzM3MTdhYmMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwZXJzb25hbC1wcm9qZWN0Iiwic2lkIjoiNTI0MGY2ZWItMDIwNi00Yjc2LTg5M2ItN2M3ZmI0MGRlMWQzIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXdqaC1wcm9qZWN0IiwiQ0hBTkdFX0NBUl9JTkZPUk1BVElPTiIsIm9mZmxpbmVfYWNjZXNzIiwiU1RBRkYiLCJERUxFVEVfQ0FSIiwidW1hX2F1dGhvcml6YXRpb24iLCJVU0VSIiwiVklFVyIsIkFERF9DQVIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiTmd1eeG7hW4gVGhhbmggSOG7tyIsInByZWZlcnJlZF91c2VybmFtZSI6Im5ndXllbnRoYW5oaHkyMDA0QGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJOZ3V54buFbiIsImZhbWlseV9uYW1lIjoiVGhhbmggSOG7tyIsImVtYWlsIjoibmd1eWVudGhhbmhoeTIwMDRAZ21haWwuY29tIn0.LKxe__e150D2szAYjAoViemLXA_O31BUxwGBJluqbgiPfQWBBdjDju4iKDfJsB90Y7gLW8iX5CmN40ogZRiBQ15G5Ge3b1FYhYpZP0jrY9Ud8mBRy8Y8g1gLtLSsKvFtrdKr-ZNdSzF70yGdVxtAqrY4rshtuCjF-8f2mAor0xl4Qh65pdUd2D7MesrTmmc45RbENRLKYuqX-WLFSSiVGfxWFKoGyUNhaH5Ow8Aejh1QGcP5YmPXA6CKDcEnHqUwNyNL5OgN24kyStJFhS1iWzo8_P9-frwUw3XlQfy5uyiXYrwk_suWsh2ZZ8dR_lnFJ1YjLIZimlAu4mOv43pEnw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"password\":\"test123456\",\r\n    \"email\":\"test@test.uit.com\",\r\n    \"username\":\"test_existed\",\r\n    \"firstName\":\"Test\",\r\n    \"lastName\":\"Test\",\r\n    \"dateOfBirth\":\"1990-01-01\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/user/emails",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "user",
+            "emails"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getAllBrand",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/vehicle-inventory/brands",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicle-inventory",
+            "brands"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getVehicleByBrandNameAndVehicleName",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/vehicle-inventory/vehicles/bmw/BMW 8 SERIES GRAN COUPÉ",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicle-inventory",
+            "vehicles",
+            "bmw",
+            "BMW 8 SERIES GRAN COUPÉ"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getAllVehicle",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/vehicle-inventory/vehicles",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicle-inventory",
+            "vehicles"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getAllVehicleOfBrand",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/vehicle-inventory/vehicles/porsche",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicle-inventory",
+            "vehicles",
+            "porsche"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "saveBrand",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5WEZTMm9Oc3FtR0pObDlpVVYyTllTcHB0RzBrdWNSNDQtTXZGWTR3MzI4In0.eyJleHAiOjE3Mjk2MDI5NjgsImlhdCI6MTcyOTU5MjE2OCwianRpIjoiOGI0YmNlNWMtYmY2My00YTAzLWE0ZGMtNzZjNzhkNmQ3Mzg0IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy93amgtcHJvamVjdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmMWFmM2I0YS0wMDM3LTRlOWUtODU0NS1iMjA4MDA2ZmY4ZTEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwZXJzb25hbC1wcm9qZWN0Iiwic2lkIjoiODg1OTJhMzEtODliMy00YWE3LThlNDUtZTAxZDcwMDJlNWQyIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXdqaC1wcm9qZWN0IiwiQ0hBTkdFX0NBUl9JTkZPUk1BVElPTiIsIm9mZmxpbmVfYWNjZXNzIiwiU1RBRkYiLCJERUxFVEVfQ0FSIiwidW1hX2F1dGhvcml6YXRpb24iLCJBRE1JTiIsIlVTRVIiLCJWSUVXIiwiQUREX0NBUiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.GCVpBxhJTRfvIugWgDBiAohy0mt8LxdeBYl6XWFvY-SVS3yKJWPvj3y6evYweLDxU_yAyeHTjkL5CjlfSAtWQUfJUEmVgsMHVHiY8ji8-VFBZ12oLBLZo8PSmaRfUN9XrVcK2J1ZJZ6nRQ7St51FCSkiUQPP3N9ViQRox4XT2JPdSrqOG3seSTbpW8oh49GnsfvfYbazaYlJSE7guN2frpnqSa5LzOB1J3jxh41mCeww6ggOECZJiRnmYcKXgTTbqXS-13FQKEHoFyTKBbgwL44C0Cga54muJLoTAPg6w1MFEa1qrWHmdKxLgn4EPgiMSP6o5ApdZ17-tCTrVlTtcQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"brandName\": \"test\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/vehicle-inventory/brands",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicle-inventory",
+            "brands"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "saveVehicle",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5WEZTMm9Oc3FtR0pObDlpVVYyTllTcHB0RzBrdWNSNDQtTXZGWTR3MzI4In0.eyJleHAiOjE3Mjg2MzM1NTQsImlhdCI6MTcyODYyMjc1NCwianRpIjoiZDVmZGNjNDEtMjBlYi00YmZlLTk1OWQtMTY2ZDExOTAwOGVjIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy93amgtcHJvamVjdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIyZWEzNzY1NS1jOTk4LTQ3YjAtYWU4Ny1mNThkYzM3MTdhYmMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwZXJzb25hbC1wcm9qZWN0Iiwic2lkIjoiZmI4NjliMWMtMjAzOC00Njg1LTg2MmUtYTIzYjMwYTljZDVhIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXdqaC1wcm9qZWN0IiwiQ0hBTkdFX0NBUl9JTkZPUk1BVElPTiIsIm9mZmxpbmVfYWNjZXNzIiwiU1RBRkYiLCJERUxFVEVfQ0FSIiwidW1hX2F1dGhvcml6YXRpb24iLCJVU0VSIiwiVklFVyIsIkFERF9DQVIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiTmd1eeG7hW4gVGhhbmggSOG7tyIsInByZWZlcnJlZF91c2VybmFtZSI6Im5ndXllbnRoYW5oaHkyMDA0QGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJOZ3V54buFbiIsImZhbWlseV9uYW1lIjoiVGhhbmggSOG7tyIsImVtYWlsIjoibmd1eWVudGhhbmhoeTIwMDRAZ21haWwuY29tIn0.IUi0Khk9lFnpmAzbr9y3Ig9oQNyk2WiLC9iD3MnN7DLCr0RDnU83lCM9MCvV1FOKcc4AveA1aO5Cd0Fig5btv07_alRzrwneHxJlSfxX2ulIYuVFRPkHNAva9ATENHdJbv9wuc7NpnCaLuHojWwLAQUJEWnmn7UZFwksrkC6-TkBFq3HKpRAeNyTX-Ew11WH99prUG4epNCPfcy74OzeYB_l6bw8dGAXBC5F4Rckznj3BEhFiTXPX8m645v3a22SaLew1lUJ8XOa88Wg9PR9aPh9DVkZcJxdwfjGywYApwDQnG-3xqSliN5ku5LT6QZ0ujjJyOkLE8F6WUSJo9IxoA",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"vehicleName\": \"Land Cruiser\",\r\n    \"vehiclePrice\": \"999\",\r\n    \"vehicleImageUrl\": \"cant find\",\r\n    \"numberOfRemaining\": 1,\r\n    \"vehicleBrandName\": \"Toyota\",\r\n    \"vehicleDescription\": \"ABC\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/vehicle-inventory/vehicles",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicle-inventory",
+            "vehicles"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "changeVehicleAmount",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5WEZTMm9Oc3FtR0pObDlpVVYyTllTcHB0RzBrdWNSNDQtTXZGWTR3MzI4In0.eyJleHAiOjE3Mjk4NTcyMTUsImlhdCI6MTcyOTg0NjQxNSwianRpIjoiOGEzNTAzMDMtMzZlMi00ZDcxLWE1MTQtYmI4Mzg3N2Q3MDUyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy93amgtcHJvamVjdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmMWFmM2I0YS0wMDM3LTRlOWUtODU0NS1iMjA4MDA2ZmY4ZTEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwZXJzb25hbC1wcm9qZWN0Iiwic2lkIjoiM2YyMGFlOTUtMWNlYS00MDhkLThhOWEtZGUyZWFkOGZiZjA2IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXdqaC1wcm9qZWN0IiwiQ0hBTkdFX0NBUl9JTkZPUk1BVElPTiIsIm9mZmxpbmVfYWNjZXNzIiwiU1RBRkYiLCJERUxFVEVfQ0FSIiwidW1hX2F1dGhvcml6YXRpb24iLCJBRE1JTiIsIlVTRVIiLCJWSUVXIiwiQUREX0NBUiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.D9oEZQ_W3Auy2qHm3OTYgghoPC6G6cxgzwZqZ6iIDySm16FIPOVnnn769lPXaPvIgAUoVslWbX_mNAFaalwW2af4Q2ak50SI-_eEZSXO_VibnzhCJczEhhWgWoFmUJgjxhcWSOdUoP2UIkN5czrapOBgfYhXMArualz8mgAa4AvrzNDMJDqiEMeQWXAwpe0v_np4HAE2zheNlpidsGw36d1y2BPlRrezD1InHHJZ3MIY1LXqDyqqEl2jg_Orf2lfnjuSCPDEdEeZhhjOnRIAnyhL9chRbfblWvNd1_RE8TlshDUHA9KHawO4VrRHBaAC3zyOImeIczHuH7LQafPKoQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"vehicleName\": \"ALPHARD\",\r\n    \"amount\": -1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/vehicle-inventory/vehicles/amount",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicle-inventory",
+            "vehicles",
+            "amount"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "deleteVehicle",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5WEZTMm9Oc3FtR0pObDlpVVYyTllTcHB0RzBrdWNSNDQtTXZGWTR3MzI4In0.eyJleHAiOjE3Mjg2MzM1NTQsImlhdCI6MTcyODYyMjc1NCwianRpIjoiZDVmZGNjNDEtMjBlYi00YmZlLTk1OWQtMTY2ZDExOTAwOGVjIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy93amgtcHJvamVjdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIyZWEzNzY1NS1jOTk4LTQ3YjAtYWU4Ny1mNThkYzM3MTdhYmMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwZXJzb25hbC1wcm9qZWN0Iiwic2lkIjoiZmI4NjliMWMtMjAzOC00Njg1LTg2MmUtYTIzYjMwYTljZDVhIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXdqaC1wcm9qZWN0IiwiQ0hBTkdFX0NBUl9JTkZPUk1BVElPTiIsIm9mZmxpbmVfYWNjZXNzIiwiU1RBRkYiLCJERUxFVEVfQ0FSIiwidW1hX2F1dGhvcml6YXRpb24iLCJVU0VSIiwiVklFVyIsIkFERF9DQVIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiTmd1eeG7hW4gVGhhbmggSOG7tyIsInByZWZlcnJlZF91c2VybmFtZSI6Im5ndXllbnRoYW5oaHkyMDA0QGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJOZ3V54buFbiIsImZhbWlseV9uYW1lIjoiVGhhbmggSOG7tyIsImVtYWlsIjoibmd1eWVudGhhbmhoeTIwMDRAZ21haWwuY29tIn0.IUi0Khk9lFnpmAzbr9y3Ig9oQNyk2WiLC9iD3MnN7DLCr0RDnU83lCM9MCvV1FOKcc4AveA1aO5Cd0Fig5btv07_alRzrwneHxJlSfxX2ulIYuVFRPkHNAva9ATENHdJbv9wuc7NpnCaLuHojWwLAQUJEWnmn7UZFwksrkC6-TkBFq3HKpRAeNyTX-Ew11WH99prUG4epNCPfcy74OzeYB_l6bw8dGAXBC5F4Rckznj3BEhFiTXPX8m645v3a22SaLew1lUJ8XOa88Wg9PR9aPh9DVkZcJxdwfjGywYApwDQnG-3xqSliN5ku5LT6QZ0ujjJyOkLE8F6WUSJo9IxoA",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/vehicle-inventory/vehicles/9ab3f692-d40d-413d-9e22-7e942250e5f4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicle-inventory",
+            "vehicles",
+            "9ab3f692-d40d-413d-9e22-7e942250e5f4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "deleteBrand",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5WEZTMm9Oc3FtR0pObDlpVVYyTllTcHB0RzBrdWNSNDQtTXZGWTR3MzI4In0.eyJleHAiOjE3Mjk4NDExOTksImlhdCI6MTcyOTgzMDM5OSwianRpIjoiYjYzZjI3MmUtOWU1Ni00MTU3LWFkYTAtMzBhZTc5YzU0M2YyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy93amgtcHJvamVjdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmMWFmM2I0YS0wMDM3LTRlOWUtODU0NS1iMjA4MDA2ZmY4ZTEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwZXJzb25hbC1wcm9qZWN0Iiwic2lkIjoiOTNmZTFjOWUtNjg2MC00MTBjLThmZmMtN2JhNmIyNGNjMjQxIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXdqaC1wcm9qZWN0IiwiQ0hBTkdFX0NBUl9JTkZPUk1BVElPTiIsIm9mZmxpbmVfYWNjZXNzIiwiU1RBRkYiLCJERUxFVEVfQ0FSIiwidW1hX2F1dGhvcml6YXRpb24iLCJBRE1JTiIsIlVTRVIiLCJWSUVXIiwiQUREX0NBUiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.RXQRaBPhoXFG68CFbxS8hNyWSykWT2vJL7zP5t8ylSAEbSgDoDe1bJqgV2GU4pZEKCmOhHEJvej5Bi63pNlyolEUlLDuuZDjdjENaJO-X3dnyAJfPn-4nkyrq0YqSOytvFGP6lFyFnu0UEa6L8SjRtfc0hXTg8aeTBEGSNc7uhEbz1mkEzCLIsWw9e_nAgkuWEk3RVvWgh5atuf4h_EejFlqU7GaNyZ7eMwbNHElU8_U0u2l_g6i-_Sy87ukxSkOMDyg9g-fSYvpbhyOgQnrV1jaaP51i-Ea71cG0jmiZCEZPA-rf_y5DW0KRWkq_xLUG0ByieUPoXu9gQAfr1H5Uw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/vehicle-inventory/brands/jaguar-landRover",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicle-inventory",
+            "brands",
+            "jaguar-landRover"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "deleteAllVehicleOfBrand",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/vehicle-inventory/vehicles?brand=vinfast",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicle-inventory",
+            "vehicles"
+          ],
+          "query": [
+            {
+              "key": "brand",
+              "value": "vinfast"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getAllBanner",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/notification/banners",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "notification",
+            "banners"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "deleteBanner",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5WEZTMm9Oc3FtR0pObDlpVVYyTllTcHB0RzBrdWNSNDQtTXZGWTR3MzI4In0.eyJleHAiOjE3Mjg4Mzc0MjksImlhdCI6MTcyODgyNjYyOSwianRpIjoiOGE0MWViYjAtMmNmNS00NDJlLWJkMjctOTNkODEzOTdlZGY2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy93amgtcHJvamVjdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmMWFmM2I0YS0wMDM3LTRlOWUtODU0NS1iMjA4MDA2ZmY4ZTEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwZXJzb25hbC1wcm9qZWN0Iiwic2lkIjoiMGZlZDM1MjctZjZjYy00NjZmLWJjNzgtZWI0OGI2OGU0OTk1IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXdqaC1wcm9qZWN0IiwiQ0hBTkdFX0NBUl9JTkZPUk1BVElPTiIsIm9mZmxpbmVfYWNjZXNzIiwiU1RBRkYiLCJERUxFVEVfQ0FSIiwidW1hX2F1dGhvcml6YXRpb24iLCJBRE1JTiIsIlVTRVIiLCJWSUVXIiwiQUREX0NBUiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.vgLf4JWY-UkqPaB0I0uu9innsfHZQYr3tniVsbKf67yFN13PxvlyA6ePA_bQCUDnelP-51BwyZ9tG2dfVKf9QtrJDuj9mQTwi5sml17cMA-zQ47S3dapUUJKC2SR47xT1W6mUNxWnAiU5bfB_nBgQMGpYBMRhJZcXyyWuAtAkwyThLyY0GFGF2tGx7nFfnfW74QsoV9RFHAsvHor53VlzvVlEzbGWlgAcpkbhwjhLw2EGFdQsU8cBHuxt-UwJvgzPdQacC-Sp7RPB4ZjyPBs7IK5LsfkIx2Qh68zfpUBs_gdiF0-_OGGCKnrhIqOmrsItdQ2lH81vN3wuHwRWfRjlA",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/notification/banners/670bcd1134e4694889c5a280",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "notification",
+            "banners",
+            "670bcd1134e4694889c5a280"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getBannerImgById",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/notification/banners/image/6701014958f4854607f4d622",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "notification",
+            "banners",
+            "image",
+            "6701014958f4854607f4d622"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "saveBanner",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5WEZTMm9Oc3FtR0pObDlpVVYyTllTcHB0RzBrdWNSNDQtTXZGWTR3MzI4In0.eyJleHAiOjE3Mjk4NDExOTksImlhdCI6MTcyOTgzMDM5OSwianRpIjoiYjYzZjI3MmUtOWU1Ni00MTU3LWFkYTAtMzBhZTc5YzU0M2YyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy93amgtcHJvamVjdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmMWFmM2I0YS0wMDM3LTRlOWUtODU0NS1iMjA4MDA2ZmY4ZTEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwZXJzb25hbC1wcm9qZWN0Iiwic2lkIjoiOTNmZTFjOWUtNjg2MC00MTBjLThmZmMtN2JhNmIyNGNjMjQxIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXdqaC1wcm9qZWN0IiwiQ0hBTkdFX0NBUl9JTkZPUk1BVElPTiIsIm9mZmxpbmVfYWNjZXNzIiwiU1RBRkYiLCJERUxFVEVfQ0FSIiwidW1hX2F1dGhvcml6YXRpb24iLCJBRE1JTiIsIlVTRVIiLCJWSUVXIiwiQUREX0NBUiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.RXQRaBPhoXFG68CFbxS8hNyWSykWT2vJL7zP5t8ylSAEbSgDoDe1bJqgV2GU4pZEKCmOhHEJvej5Bi63pNlyolEUlLDuuZDjdjENaJO-X3dnyAJfPn-4nkyrq0YqSOytvFGP6lFyFnu0UEa6L8SjRtfc0hXTg8aeTBEGSNc7uhEbz1mkEzCLIsWw9e_nAgkuWEk3RVvWgh5atuf4h_EejFlqU7GaNyZ7eMwbNHElU8_U0u2l_g6i-_Sy87ukxSkOMDyg9g-fSYvpbhyOgQnrV1jaaP51i-Ea71cG0jmiZCEZPA-rf_y5DW0KRWkq_xLUG0ByieUPoXu9gQAfr1H5Uw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "bannerTitle",
+              "value": "Discounting campain in 2024",
+              "type": "text"
+            },
+            {
+              "key": "bannerDescription",
+              "value": "An announcement about our Discounting campain in 2024",
+              "type": "text"
+            },
+            {
+              "key": "bannerUrl",
+              "value": "http://example.com",
+              "type": "text"
+            },
+            {
+              "key": "bannerImage",
+              "type": "file",
+              "src": "/C:/Users/ADMIN/Downloads/discounting.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/notification/banners",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "notification",
+            "banners"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "sendAccountMail",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5WEZTMm9Oc3FtR0pObDlpVVYyTllTcHB0RzBrdWNSNDQtTXZGWTR3MzI4In0.eyJleHAiOjE3Mjg4MzI2NzYsImlhdCI6MTcyODgyMTg3NiwianRpIjoiODYzZjdlMmUtOTYxMi00OTJjLTk4NTAtODZkZmM5MWNjMTU5IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy93amgtcHJvamVjdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmMWFmM2I0YS0wMDM3LTRlOWUtODU0NS1iMjA4MDA2ZmY4ZTEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwZXJzb25hbC1wcm9qZWN0Iiwic2lkIjoiODExNDRjNjAtNjhiNi00Y2QxLThkNGQtMGRhZGRlN2UyM2ZjIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXdqaC1wcm9qZWN0IiwiQ0hBTkdFX0NBUl9JTkZPUk1BVElPTiIsIm9mZmxpbmVfYWNjZXNzIiwiU1RBRkYiLCJERUxFVEVfQ0FSIiwidW1hX2F1dGhvcml6YXRpb24iLCJBRE1JTiIsIlVTRVIiLCJWSUVXIiwiQUREX0NBUiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.AkkyICc92Jhls_ZfcpwRcHDaf2J3B5cX7fZXGgIPaw5cgv2Ah_y4Xdtc4Nf1A5bse2nE6QuqVrHRre9tPefalDjL8XjmxzEPM4TMrntXmUPX5gQGeOYCnLEHbjd14kEBrcb3_ijVucXN-5stmG5Wv62sEqUkHl2FPyV_feMqfku0ekS1voUrgr8j83EygOqSF_yM5rF1Vht1HwQWDFmzgURIr5w3izzD7vEwuxXoLYmt-oEg3Bya9AAiiD5Pu927ts-CAZmdlhKgpAqPo-DMOlv32DxWDf7ohHfh-SN70ybMUj5emdnOQ6OmSeAzHFWXQbe9rOx2fMogCHnXo2F6kQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"12345235235235dsadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\r\n    \"password\": \"123452352352aaaaaaaaaaaaaaa35aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/notification/email/nguyenthanhhy2004@gmail.com",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "notification",
+            "email",
+            "nguyenthanhhy2004@gmail.com"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "circuitBreaker",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/actuator/health",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "actuator",
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getBrandNames",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/vehicle-inventory/brands/names",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicle-inventory",
+            "brands",
+            "names"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getVehicleNames",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/vehicle-inventory/vehicles/names",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicle-inventory",
+            "vehicles",
+            "names"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "recommendVehicleNames",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/search/vehicles/tayCan",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "search",
+            "vehicles",
+            "tayCan"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "recommendBrandNames",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/search/brands/ta",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "search",
+            "brands",
+            "ta"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "recommendVehicleNamesByBrandName",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/search/vehicles/toyota/c",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "search",
+            "vehicles",
+            "toyota",
+            "c"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "findBrandNameByVehicleName",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/vehicle-inventory/vehicles/Camry 2.5HV/brand",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicle-inventory",
+            "vehicles",
+            "Camry 2.5HV",
+            "brand"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getRelevantVehicles",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"brandName\":\"a\",\r\n    \"carName\":\"a\",\r\n    \"pageNumber\": 1,\r\n    \"pageSize\": 12\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/search/vehicles",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "search",
+            "vehicles"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "sendVerificationCode",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "sendAndSaveVerificationCode",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"22520593@gm.uit.edu.vn\",\r\n    \"username\": \"testsystem1\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/user/reset-password/verify",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "user",
+            "reset-password",
+            "verify"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "confirmVerificationCode",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"code\": \"3ubXWP\",\r\n    \"email\": \"22520593@gm.uit.edu.vn\",\r\n    \"username\": \"testsystem1\",\r\n    \"newPassword\": \"1\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/user/reset-password/confirm",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "user",
+            "reset-password",
+            "confirm"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "saveContract",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5WEZTMm9Oc3FtR0pObDlpVVYyTllTcHB0RzBrdWNSNDQtTXZGWTR3MzI4In0.eyJleHAiOjE3Mjk2NjUzMDcsImlhdCI6MTcyOTY1NDUwNywianRpIjoiMTk1M2Q4NTktMWZiNC00OWZmLTk2NTEtNDJiMTlmNWI5NjZhIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy93amgtcHJvamVjdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmMWFmM2I0YS0wMDM3LTRlOWUtODU0NS1iMjA4MDA2ZmY4ZTEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwZXJzb25hbC1wcm9qZWN0Iiwic2lkIjoiYWE5ZmJiNWEtMGI4Yy00YmU0LWIwMzAtZGYzYjg5OTQzMTA4IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXdqaC1wcm9qZWN0IiwiQ0hBTkdFX0NBUl9JTkZPUk1BVElPTiIsIm9mZmxpbmVfYWNjZXNzIiwiU1RBRkYiLCJERUxFVEVfQ0FSIiwidW1hX2F1dGhvcml6YXRpb24iLCJBRE1JTiIsIlVTRVIiLCJWSUVXIiwiQUREX0NBUiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.PmtRYcA4BpB3thMmWmhRXIzqiTYGqzupt_VVNlFwwbUArL_iov7H8jpKb6HzDmqysNocRezkehbjK0JmS3TJyRoB2Z1vzdfbPwtFIgcL76TDVpC_dEblpN1z_l4sAmdcTUXDV9qG1H7ZE7dkcEYQ8yynkkjeJTk0NsA8bi9l9v9Gjb1BXoe6NcEMIkWNwnF5LdX4Xuv0MQGGA2ZVxiCpkWpWMVSEZxhTIrVlcVtRXJkYBBWwfUjq3j0ZBEnek6HJ2yhwN6ojMr9Jtph6eaWUoouVaV792rHRuPKSmvCQjoA2l1bXQJKL-OpV8oy2vq7JD8QNu1koNekV8vySWnoRyQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "brandName",
+              "value": "toyota",
+              "type": "text"
+            },
+            {
+              "key": "vehicleName",
+              "value": "ALPHARD",
+              "type": "text"
+            },
+            {
+              "key": "name",
+              "value": "Hy Hy",
+              "type": "text"
+            },
+            {
+              "key": "address",
+              "value": "a",
+              "type": "text"
+            },
+            {
+              "key": "phoneNumber",
+              "value": "0941609091",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "nguyenthanhhy2004@gmail.com",
+              "type": "text"
+            },
+            {
+              "key": "gender",
+              "value": "male",
+              "type": "text"
+            },
+            {
+              "key": "dateOfBirth",
+              "value": "1990-01-01",
+              "type": "text"
+            },
+            {
+              "key": "price",
+              "value": "1",
+              "type": "text"
+            },
+            {
+              "key": "contractPdf",
+              "type": "file",
+              "src": "/C:/Users/ADMIN/Downloads/Full+IELTS+speaking+tests+1.pdf"
+            },
+            {
+              "key": "idCardNumber",
+              "value": "aaaaaaaaaaa",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/deposite-contract/contracts",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "deposite-contract",
+            "contracts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "announceContract",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5WEZTMm9Oc3FtR0pObDlpVVYyTllTcHB0RzBrdWNSNDQtTXZGWTR3MzI4In0.eyJleHAiOjE3Mjk0MzcwNTQsImlhdCI6MTcyOTQyNjI1NCwianRpIjoiYWM4ZTJmMjUtMmU2MC00ZmZkLWE4MDgtYmRiNjViMWIxYTcwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy93amgtcHJvamVjdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmMWFmM2I0YS0wMDM3LTRlOWUtODU0NS1iMjA4MDA2ZmY4ZTEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwZXJzb25hbC1wcm9qZWN0Iiwic2lkIjoiZjY2ZWY4NTgtMDA0My00MGY1LWE4NTgtNDJmN2YzNmQ3MjUyIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXdqaC1wcm9qZWN0IiwiQ0hBTkdFX0NBUl9JTkZPUk1BVElPTiIsIm9mZmxpbmVfYWNjZXNzIiwiU1RBRkYiLCJERUxFVEVfQ0FSIiwidW1hX2F1dGhvcml6YXRpb24iLCJBRE1JTiIsIlVTRVIiLCJWSUVXIiwiQUREX0NBUiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.C_lKDBsaiUh3jONMWWL-SxBvKdSIVKpfiGLZwCmMz_QH5V8C34Uz00MtOyhZQwBo3nTja2AiGgfMBjEctkllkdRLKq0LSJ2fyOB3tPHzGZwhLt1QQhEAJKaNxQyzrFHypuBFB6uZnmhVeYYmbMp8_Ceo7JK9270AnO6bIv-d5uUSQ09ClGOXN48b-7rYNkCyjV1rDVcXFI2YI6CAM9ZTWYGAwuCQiGXsCEDu8DA4niZQw_-0hhP_YkA5a06FDGjjJ7moX14SbZ8qozKZMn8XVx6-D-4nImdFbgR10DEsPyFEselvz1o6zK7UlV-Ph0hvTcnkNAfICiyL2WUx0Hwa-A",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "aaa",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "nguyenthanhhy2004@gmail.com",
+              "type": "text"
+            },
+            {
+              "key": "contractPdf",
+              "type": "file",
+              "src": "/C:/Users/ADMIN/Downloads/receipt (4).pdf.crdownload"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/deposite-contract/contracts/email",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "deposite-contract",
+            "contracts",
+            "email"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getContractPdf",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5WEZTMm9Oc3FtR0pObDlpVVYyTllTcHB0RzBrdWNSNDQtTXZGWTR3MzI4In0.eyJleHAiOjE3Mjk0Mjg4MjYsImlhdCI6MTcyOTQxODAyNiwianRpIjoiZGFiYmU0MmEtNzQ4Ny00YjEyLTg1M2YtYTA2MWNiZmEyZDFiIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy93amgtcHJvamVjdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI3YTEyYjdiNy1hMTkxLTRmZDQtODBjZC0yN2JhMWJhNjdlOTkiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwZXJzb25hbC1wcm9qZWN0Iiwic2lkIjoiZTY2NmI5MzMtMzA2OS00MzgzLTkyYzktNjJhMTRhMzY1MmZkIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXdqaC1wcm9qZWN0Iiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsIlVTRVIiLCJWSUVXIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6Ikh5IEh5IiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdHN5c3RlbTEiLCJnaXZlbl9uYW1lIjoiSHkiLCJmYW1pbHlfbmFtZSI6Ikh5IiwiZW1haWwiOiIyMjUyMDU5M0BnbS51aXQuZWR1LnZuIn0.nfhNnrPhoUQlAEo5lADSnPTrgiS9KsRX62WAL0dGa8q9J7JClQPuYKlwAQIka0i7rIAn0Gxb9Ek79fDmQ_MMs31lj7-N_CiBF-qi40rnoJUWAreGSsjEyXV72qhZ_lY0IMYgqgQP3ZYD8mJpFmHkkOpcHKy8ON4HiDae1CVNMWfxWQCaaAUhB5jXqHAqiisKojtHzLNq7ddYeiYeACVP04lAba0NIiOy8ze30P6rKWrd8-afevySdvB7v2hjfCian4ByGCFROxbnQ3B9eDuajni_10pVuguk8NuFmc9dus1ry0k6eDFwaIQSNThC_BiEIome0n_rK10bKrl7-ajnRw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "brandName",
+              "value": "toyota",
+              "type": "text"
+            },
+            {
+              "key": "vehicleName",
+              "value": "ALPHARD",
+              "type": "text"
+            },
+            {
+              "key": "name",
+              "value": "Hy",
+              "type": "text"
+            },
+            {
+              "key": "address",
+              "value": "Ben Tre",
+              "type": "text"
+            },
+            {
+              "key": "phoneNumber",
+              "value": "0941609091",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "nguyenthanhhy2004@gmail.com",
+              "type": "text"
+            },
+            {
+              "key": "age",
+              "value": "20",
+              "type": "text"
+            },
+            {
+              "key": "gender",
+              "value": "male",
+              "type": "text"
+            },
+            {
+              "key": "birthday",
+              "value": "1990-01-01",
+              "type": "text"
+            },
+            {
+              "key": "price",
+              "value": "999",
+              "type": "text"
+            },
+            {
+              "key": "contractPdf",
+              "type": "file",
+              "src": "/C:/Users/ADMIN/Downloads/Full+IELTS+speaking+tests+1.pdf"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/deposite-contract/contracts/pdf/6714ddaf2f92581796edfd46",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "deposite-contract",
+            "contracts",
+            "pdf",
+            "6714ddaf2f92581796edfd46"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getContractById",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5WEZTMm9Oc3FtR0pObDlpVVYyTllTcHB0RzBrdWNSNDQtTXZGWTR3MzI4In0.eyJleHAiOjE3MjkxNTk0NTgsImlhdCI6MTcyOTE0ODY1OCwianRpIjoiMGQ1M2YwYzMtZTA2MS00OTExLWI5MTctZWFlNGY0ZmNkYmY4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy93amgtcHJvamVjdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmMWFmM2I0YS0wMDM3LTRlOWUtODU0NS1iMjA4MDA2ZmY4ZTEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwZXJzb25hbC1wcm9qZWN0Iiwic2lkIjoiNDBhNDIzNzktNjI2Ni00NjMzLThjMzAtZDUzYTAwMWEzZGIwIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXdqaC1wcm9qZWN0IiwiQ0hBTkdFX0NBUl9JTkZPUk1BVElPTiIsIm9mZmxpbmVfYWNjZXNzIiwiU1RBRkYiLCJERUxFVEVfQ0FSIiwidW1hX2F1dGhvcml6YXRpb24iLCJBRE1JTiIsIlVTRVIiLCJWSUVXIiwiQUREX0NBUiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.QXpwpkIB1bu3VHe1FkqUMyB1V5_ilYJB0b1z0bpdNRaVADKYabg1pion7KGR1k81Ad97wubOWheZ7J7-EXjIPFRkccoubR6ZSmIQ1xk2d5nPRGU7lYLw5LaZBg2X4juSJwRN45-hK74C7QQV0WbrhvuEty2ydPqyOzJeY6rwwcPEg9nwMvD8BssQ2Xn18v6uwLaNHiXsSu73AdTZyRC8IeKX_Dh8h0lidZDRTmBRooUrf9EQL6cL1J6Bfb6Za3idr0dZWeTFz21BzCu45t5_g_IDssD2OqtAqLpWZWPLvo0dwPdhlkL2AgCFyvTg7rrCyY5GAL5tIWpDY8zyu3xIdQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "brandName",
+              "value": "toyota",
+              "type": "text"
+            },
+            {
+              "key": "vehicleName",
+              "value": "ALPHARD",
+              "type": "text"
+            },
+            {
+              "key": "name",
+              "value": "Hy",
+              "type": "text"
+            },
+            {
+              "key": "address",
+              "value": "Ben Tre",
+              "type": "text"
+            },
+            {
+              "key": "phoneNumber",
+              "value": "0941609091",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "nguyenthanhhy2004@gmail.com",
+              "type": "text"
+            },
+            {
+              "key": "age",
+              "value": "20",
+              "type": "text"
+            },
+            {
+              "key": "gender",
+              "value": "male",
+              "type": "text"
+            },
+            {
+              "key": "birthday",
+              "value": "1990-01-01",
+              "type": "text"
+            },
+            {
+              "key": "price",
+              "value": "999",
+              "type": "text"
+            },
+            {
+              "key": "contractPdf",
+              "type": "file",
+              "src": "/C:/Users/ADMIN/Downloads/Full+IELTS+speaking+tests+1.pdf"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/deposite-contract/contracts/0c19a96c-035f-4b14-a1a3-a0d62748b2f1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "deposite-contract",
+            "contracts",
+            "0c19a96c-035f-4b14-a1a3-a0d62748b2f1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getAllContractsByEmail",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5WEZTMm9Oc3FtR0pObDlpVVYyTllTcHB0RzBrdWNSNDQtTXZGWTR3MzI4In0.eyJleHAiOjE3MjkxNDg0NTcsImlhdCI6MTcyOTEzNzY1NywianRpIjoiNmEyOTllM2YtN2NiMy00MzM3LWE1NTktYjNiMzU5M2FlYmNkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy93amgtcHJvamVjdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmMWFmM2I0YS0wMDM3LTRlOWUtODU0NS1iMjA4MDA2ZmY4ZTEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwZXJzb25hbC1wcm9qZWN0Iiwic2lkIjoiOGIzMmY5MmYtNjM2YS00MjdkLTk5YzgtODA2M2ZlOWY3NmQ5IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXdqaC1wcm9qZWN0IiwiQ0hBTkdFX0NBUl9JTkZPUk1BVElPTiIsIm9mZmxpbmVfYWNjZXNzIiwiU1RBRkYiLCJERUxFVEVfQ0FSIiwidW1hX2F1dGhvcml6YXRpb24iLCJBRE1JTiIsIlVTRVIiLCJWSUVXIiwiQUREX0NBUiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.sEfakoKGJkfLY-pu8-zGpfbZvUwSJuKUQ6n085K88KFlV4JcV-AMcg2bdfNHXVOffHHrmotimt9rtYT3PhIVerN1Tp-xLIZiemZz88xPUi2AEcccL4TgkL8wAaXZJiH_-ibiUUH38UTnVr4k86bPfvGhYvHfD56BWdEVmdSTEDFsRVKnVacxEQF1G3LrPUVvA-FohJnwNvLU9nulQ7HTwzNonS6401Hbz6hLzIcdqNz72CdRBrE4v4Hetq7G3V0zyXHJ0j53KDikf0AGVpIawEZZlzbPxq9zaOpTpbq-H966oY6zsSpqC4xkUyMOemwSSlFtZ4Baf8BG_sJCpaENLw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "brandName",
+              "value": "toyota",
+              "type": "text"
+            },
+            {
+              "key": "vehicleName",
+              "value": "ALPHARD",
+              "type": "text"
+            },
+            {
+              "key": "name",
+              "value": "Hy",
+              "type": "text"
+            },
+            {
+              "key": "address",
+              "value": "Ben Tre",
+              "type": "text"
+            },
+            {
+              "key": "phoneNumber",
+              "value": "0941609091",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "nguyenthanhhy2004@gmail.com",
+              "type": "text"
+            },
+            {
+              "key": "age",
+              "value": "20",
+              "type": "text"
+            },
+            {
+              "key": "gender",
+              "value": "male",
+              "type": "text"
+            },
+            {
+              "key": "birthday",
+              "value": "1990-01-01",
+              "type": "text"
+            },
+            {
+              "key": "price",
+              "value": "999",
+              "type": "text"
+            },
+            {
+              "key": "contractPdf",
+              "type": "file",
+              "src": "/C:/Users/ADMIN/Downloads/Full+IELTS+speaking+tests+1.pdf"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/deposite-contract/contracts/email/nguyenthanhhy2004@gmail.com",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "deposite-contract",
+            "contracts",
+            "email",
+            "nguyenthanhhy2004@gmail.com"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "deleteContractById",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5WEZTMm9Oc3FtR0pObDlpVVYyTllTcHB0RzBrdWNSNDQtTXZGWTR3MzI4In0.eyJleHAiOjE3Mjk0Mjg4MjYsImlhdCI6MTcyOTQxODAyNiwianRpIjoiZGFiYmU0MmEtNzQ4Ny00YjEyLTg1M2YtYTA2MWNiZmEyZDFiIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy93amgtcHJvamVjdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI3YTEyYjdiNy1hMTkxLTRmZDQtODBjZC0yN2JhMWJhNjdlOTkiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwZXJzb25hbC1wcm9qZWN0Iiwic2lkIjoiZTY2NmI5MzMtMzA2OS00MzgzLTkyYzktNjJhMTRhMzY1MmZkIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXdqaC1wcm9qZWN0Iiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsIlVTRVIiLCJWSUVXIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6Ikh5IEh5IiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdHN5c3RlbTEiLCJnaXZlbl9uYW1lIjoiSHkiLCJmYW1pbHlfbmFtZSI6Ikh5IiwiZW1haWwiOiIyMjUyMDU5M0BnbS51aXQuZWR1LnZuIn0.nfhNnrPhoUQlAEo5lADSnPTrgiS9KsRX62WAL0dGa8q9J7JClQPuYKlwAQIka0i7rIAn0Gxb9Ek79fDmQ_MMs31lj7-N_CiBF-qi40rnoJUWAreGSsjEyXV72qhZ_lY0IMYgqgQP3ZYD8mJpFmHkkOpcHKy8ON4HiDae1CVNMWfxWQCaaAUhB5jXqHAqiisKojtHzLNq7ddYeiYeACVP04lAba0NIiOy8ze30P6rKWrd8-afevySdvB7v2hjfCian4ByGCFROxbnQ3B9eDuajni_10pVuguk8NuFmc9dus1ry0k6eDFwaIQSNThC_BiEIome0n_rK10bKrl7-ajnRw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "brandName",
+              "value": "toyota",
+              "type": "text"
+            },
+            {
+              "key": "vehicleName",
+              "value": "ALPHARD",
+              "type": "text"
+            },
+            {
+              "key": "name",
+              "value": "Hy",
+              "type": "text"
+            },
+            {
+              "key": "address",
+              "value": "Ben Tre",
+              "type": "text"
+            },
+            {
+              "key": "phoneNumber",
+              "value": "0941609091",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "nguyenthanhhy2004@gmail.com",
+              "type": "text"
+            },
+            {
+              "key": "age",
+              "value": "20",
+              "type": "text"
+            },
+            {
+              "key": "gender",
+              "value": "male",
+              "type": "text"
+            },
+            {
+              "key": "birthday",
+              "value": "1990-01-01",
+              "type": "text"
+            },
+            {
+              "key": "price",
+              "value": "999",
+              "type": "text"
+            },
+            {
+              "key": "contractPdf",
+              "type": "file",
+              "src": "/C:/Users/ADMIN/Downloads/Full+IELTS+speaking+tests+1.pdf"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/deposite-contract/contracts/8884855c-1411-473b-963c-7766e389f5d3",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "deposite-contract",
+            "contracts",
+            "8884855c-1411-473b-963c-7766e389f5d3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "deleteAllContracts",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5WEZTMm9Oc3FtR0pObDlpVVYyTllTcHB0RzBrdWNSNDQtTXZGWTR3MzI4In0.eyJleHAiOjE3Mjk2Njc5MTQsImlhdCI6MTcyOTY1NzExNCwianRpIjoiY2FmZjAwYmUtZjIyMi00Y2U4LTk0YmYtYmJlNGRmMDdjMjA0IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy93amgtcHJvamVjdCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmMWFmM2I0YS0wMDM3LTRlOWUtODU0NS1iMjA4MDA2ZmY4ZTEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwZXJzb25hbC1wcm9qZWN0Iiwic2lkIjoiMjg4Y2RiMDUtZTRlMS00NDkzLTgyOWQtNDdjNmY3ZWVjZWRkIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXdqaC1wcm9qZWN0IiwiQ0hBTkdFX0NBUl9JTkZPUk1BVElPTiIsIm9mZmxpbmVfYWNjZXNzIiwiU1RBRkYiLCJERUxFVEVfQ0FSIiwidW1hX2F1dGhvcml6YXRpb24iLCJBRE1JTiIsIlVTRVIiLCJWSUVXIiwiQUREX0NBUiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.C5oXtzQysok1b8cxolayCo2w5KqnCQJg22CMlrHLuPbdLYWhCyz1GM2E09rDjiYtWL-hKv6MwSV11y0xCwOi3ubRz3p_7EX3CjAkeOOkzL74XPN8IDKgrOwGrP7Vofe9rR-oiLUTrgUtYF9kMCBUBbUZLu8dZ6mFjahQFWriaoFhFJGVF_koVddDEhbKRnElUmnNE92WUkdIdqtt6jMk6PPapXtE53iapLYOT1sQl-zC3AgCwbdhbrqhdbWDxKUyB7GP5_aGlmGqsJtZjhoeEKODNC6DgLPVB_cmAsOWYARMxLvJFwXY6HkQrUC1gum6ZzHQDwcUSxv8PixiksHYqQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "brandName",
+              "value": "toyota",
+              "type": "text"
+            },
+            {
+              "key": "vehicleName",
+              "value": "ALPHARD",
+              "type": "text"
+            },
+            {
+              "key": "name",
+              "value": "Hy",
+              "type": "text"
+            },
+            {
+              "key": "address",
+              "value": "Ben Tre",
+              "type": "text"
+            },
+            {
+              "key": "phoneNumber",
+              "value": "0941609091",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "nguyenthanhhy2004@gmail.com",
+              "type": "text"
+            },
+            {
+              "key": "age",
+              "value": "20",
+              "type": "text"
+            },
+            {
+              "key": "gender",
+              "value": "male",
+              "type": "text"
+            },
+            {
+              "key": "birthday",
+              "value": "1990-01-01",
+              "type": "text"
+            },
+            {
+              "key": "price",
+              "value": "999",
+              "type": "text"
+            },
+            {
+              "key": "contractPdf",
+              "type": "file",
+              "src": "/C:/Users/ADMIN/Downloads/Full+IELTS+speaking+tests+1.pdf"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/deposite-contract/contracts",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "deposite-contract",
+            "contracts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "changeVehicleAmountByDepositing",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/vehicle-inventory/vehicles/toyota/ALPHARD",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "vehicle-inventory",
+            "vehicles",
+            "toyota",
+            "ALPHARD"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
