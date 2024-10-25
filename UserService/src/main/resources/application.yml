@@ -20,7 +20,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: "jdbc:mysql://localhost:6606/USER_SERVICE?useSSL=false&serverTimezone=UTC"
     username: "root"
-    password: "0941609091Th@"
+    password: "root"
 
 identity-provider:
   url: localhost:8180

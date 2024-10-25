@@ -1,7 +1,7 @@
 version: '4'
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.5.0
+    image: nguyenthanhhy2004/zookeeper:v7.5.0-wjh
     hostname: zookeeper
     container_name: zookeeper
     ports:
@@ -11,7 +11,7 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
 
   broker:
-    image: confluentinc/cp-kafka:7.5.0
+    image: nguyenthanhhy2004/kafka-broker:v7.5.0-wjh
     container_name: broker
     ports:
       - "9092:9092"
@@ -26,7 +26,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   schema-registry:
-    image: confluentinc/cp-schema-registry:7.5.0
+    image: nguyenthanhhy2004/schema-registry:v7.5.0-wjh
     hostname: schema-registry
     container_name: schema-registry
     depends_on:
@@ -37,9 +37,10 @@ services:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker:29092'
       SCHEMA_REGISTRY_LISTENERS: http://schema-registry:8081
+
   kafka-ui:
     container_name: kafka-ui
-    image: provectuslabs/kafka-ui:latest
+    image: nguyenthanhhy2004/kafka-ui:v1-wjh
     ports:
       - "8086:8080"
     depends_on:
@@ -50,3 +51,29 @@ services:
       KAFKA_CLUSTERS_BOOTSTRAPSERVERS: broker:29092
       KAFKA_CLUSTERS_SCHEMAREGISTRY: http://schema-registry:8081
       DYNAMIC_CONFIG_ENABLED: 'true'
+
+  mongo:
+    image: nguyenthanhhy2004/mongo:v1-wjh
+    container_name: mongo-container
+    ports:
+      - "3303:27017"
+
+  keycloak:
+    image: nguyenthanhhy2004/keycloak:v1-wjh
+    container_name: keycloak
+    ports:
+      - "8180:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command: start-dev
+
+  mysql:
+    image: nguyenthanhhy2004/mysql:v1-wjh
+    container_name: project-mysql
+    ports:
+      - "6606:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
