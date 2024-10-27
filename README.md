@@ -71,7 +71,7 @@ docker-compose up -d
 
 ### Initialize MySQL database
 
-Open your MySQL command line and run the commands from the file scripts.sql.
+Open your `MySQL command line` and run the commands from the file [scripts.sql](https://github.com/nguyenthanhhy0108/Web-Personal-Project-BE/blob/main/scripts.sql).
 
 ### Build maven project
 
