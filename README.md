@@ -69,6 +69,10 @@ docker-compose up -d
 
 **`After this step, make sure your MongoDB, MySQL and these pulled containers active.`**
 
+### Initialize MySQL database
+
+Open your MySQL command line and run the commands from the file scripts.sql.
+
 ### Build maven project
 
 At the `project root`, run the following command to build the project with Maven:
