@@ -30,6 +30,7 @@
         <module>NotificationService</module>
         <module>SearchService</module>
         <module>OrderService</module>
+        <module>ChatService</module>
     </modules>
 
     <scm>

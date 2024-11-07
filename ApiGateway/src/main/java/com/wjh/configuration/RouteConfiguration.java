@@ -79,6 +79,16 @@ public class RouteConfiguration {
     }
 
     @Bean
+    public RouterFunction<ServerResponse> chatServiceRoutes() {
+        return GatewayRouterFunctions.route("chat-route")
+                .route(RequestPredicates.path("/chat/**"), http())
+                .filter(lb("chat-service"))
+                .filter(CircuitBreakerFilterFunctions.circuitBreaker("chat-service-circuit-breaker",
+                        URI.create("forward:/fallback-route")))
+                .build();
+    }
+
+    @Bean
     public RouterFunction<ServerResponse> fallbackRoutes() {
         return RouterFunctions
                 .route(RequestPredicates.path("/fallback-route"),

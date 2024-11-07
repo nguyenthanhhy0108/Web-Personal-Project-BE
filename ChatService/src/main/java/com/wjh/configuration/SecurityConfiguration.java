@@ -31,16 +31,7 @@ public class SecurityConfiguration {
         // Authorization rules
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/eureka/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/vehicle-inventory/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/vehicle-inventory/brands/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/vehicle-inventory/brands").authenticated()
-                .requestMatchers(HttpMethod.DELETE, "/vehicle-inventory/brands/*").authenticated()
-                .requestMatchers(HttpMethod.POST, "/vehicle-inventory/vehicles").authenticated()
-                .requestMatchers(HttpMethod.PUT, "/vehicle-inventory/vehicles/amount").authenticated()
-                .requestMatchers(HttpMethod.DELETE, "/vehicle-inventory/vehicles/**").authenticated()
-                .requestMatchers(HttpMethod.GET, "/vehicle-inventory/vehicles/**").permitAll()
-                .requestMatchers(HttpMethod.PUT, "/vehicle-inventory/vehicles/*/*").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 );
         http.oauth2ResourceServer(oauth2 -> oauth2.jwt(
                 jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthenticationConverter())

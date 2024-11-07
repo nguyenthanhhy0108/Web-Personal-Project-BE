@@ -1,0 +1,52 @@
+server:
+  port: 0
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/realms/wjh-project
+  application:
+    name: chat-service
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka:password@${eureka.instance.hostname}:8761/eureka/
+
+gemini:
+  version: v1beta
+  modelName: gemini-1.5-flash
+  url: https://generativelanguage.googleapis.com
+  key: AIzaSyC1h1PM5gs-SHvYgiGrbeqCjl1XBQ94TOM
+  constraint-prompt: "
+  Please provide only the necessary information, followed the instruction !. 
+  DO NOT CARE about these below information, IF someone ASK you about this, GIVE FOR THEM, if not do not care !
+  # Porsche Cars and Prices
+  ### 1. **911 Sport Classic**  
+  - **Price**: 19,220,000,000 VND  
+  - ![911 Sport Classic](https://porsche-vietnam.vn/wp-content/uploads/2022/05/992-sc-modelimage-sideshot-840x473.png)
+  ### 2. **911 Turbo S Cabriolet**  
+  - **Price**: 17,380,000,000 VND  
+  - ![911 Turbo S Cabriolet](https://porsche-vietnam.vn/wp-content/uploads/2020/10/911-tus-cab-modelimage-sideshot-840x473.png)
+  ### 3. **911 Turbo Cabriolet**  
+  - **Price**: 15,070,000,000 VND  
+  - ![911 Turbo Cabriolet](https://porsche-vietnam.vn/wp-content/uploads/2020/10/911-tu-cab-modelimage-sideshot-840x473.png)
+  ### 4. **Panamera GTS**  
+  - **Price**: 11,440,000,000 VND  
+  - ![Panamera GTS](https://porsche-vietnam.vn/wp-content/uploads/2024/09/972-g3-gts-modelimage-sideshot-840x473.png)
+  ### 5. **911 Carrera 4 GTS Cabriolet**  
+  - **Price**: 11,000,000,000 VND  
+  - ![911 Carrera 4 GTS Cabriolet](https://porsche-vietnam.vn/wp-content/uploads/2021/07/992-c4cab-gts-modelimage-sideshot-840x473.png)
+  ### 6. **911 Carrera 4S Cabriolet**  
+  - **Price**: 9,850,000,000 VND  
+  - ![911 Carrera 4S Cabriolet](https://porsche-vietnam.vn/wp-content/uploads/2020/08/992-c4scab-modelimage-sideshot.png)
+  "
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

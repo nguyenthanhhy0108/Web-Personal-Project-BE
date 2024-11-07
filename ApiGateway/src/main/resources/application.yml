@@ -6,7 +6,7 @@ eureka:
 resilience4j:
   circuitbreaker:
     instances:
-      vehicleInventoryCB:
+      circuit-breaker:
         slidingWindowSize: 10
         failureRateThreshold: 50
         minimumNumberOfCalls: 5
@@ -24,7 +24,7 @@ resilience4j:
     configs:
       default:
         wait-duration:
-          seconds: 2
+          seconds: 3
         max-attempts: 3
 
 management:
@@ -40,6 +40,10 @@ management:
         include: "*"
 
 spring:
+  cloud:
+    circuitbreaker:
+      resilience4j:
+        disable-time-limiter: true
   application:
     name: api-gateway
 
