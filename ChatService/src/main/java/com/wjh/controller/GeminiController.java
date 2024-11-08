@@ -1,5 +1,6 @@
 package com.wjh.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.wjh.dto.request.ChatBotRequest;
 import com.wjh.dto.response.ApiResponse;
 import com.wjh.dto.response.ChatBotResponse;
