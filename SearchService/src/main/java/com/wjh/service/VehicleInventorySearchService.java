@@ -1,5 +1,7 @@
 package com.wjh.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wjh.dto.request.CarSearchParams;
 import com.wjh.dto.response.ApiResponse;
 import com.wjh.dto.response.CarsSearchResponse;
@@ -8,6 +10,7 @@ import com.wjh.exception.AppException;
 import com.wjh.exception.ErrorCode;
 import com.wjh.repository.VehicleInventoryClient;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,10 +20,14 @@ import java.util.Objects;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
+@Slf4j
 public class VehicleInventorySearchService {
 
     private final VehicleInventoryClient vehicleInventoryClient;
 
+    private final RedisService redisService;
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public List<String> getAllBrandNames() {
         ResponseEntity<ApiResponse<List<String>>> response =
@@ -95,6 +102,20 @@ public class VehicleInventorySearchService {
 
     public CarsSearchResponse getRelevantVehicles(
             CarSearchParams carSearchParams) {
+
+        String jsonValue = (String) this.redisService.get(carSearchParams.toString());
+
+        log.info("Cache: {}", jsonValue);
+
+        if (jsonValue != null) {
+            try {
+                return this.objectMapper.readValue(jsonValue, CarsSearchResponse.class);
+            } catch (JsonProcessingException e) {
+                log.error(e.getMessage());
+                log.error("Reading Cache failed!");
+            }
+        }
+
         List<VehicleWithBrandResponse> allVehicles;
         List<VehicleWithBrandResponse> relevantVehicles;
         CarsSearchResponse response = new CarsSearchResponse();
@@ -123,9 +144,18 @@ public class VehicleInventorySearchService {
 
         response.setCars(
                 relevantVehicles.subList((carSearchParams.getPageNumber() - 1) * carSearchParams.getPageSize(),
-                Math.min(carSearchParams.getPageNumber() * carSearchParams.getPageSize(), relevantVehicles.size())));
+                        Math.min(carSearchParams.getPageNumber() * carSearchParams.getPageSize(),
+                                relevantVehicles.size())));
         response.setTotalPages(
                 (int)(Math.ceil((double) relevantVehicles.size() / (double) carSearchParams.getPageSize())));
+
+        try {
+            this.redisService.save(
+                    carSearchParams.toString(), this.objectMapper.writeValueAsString(response), 3600);
+        } catch (JsonProcessingException e) {
+            log.error(e.getMessage());
+            log.error("Caching fail");
+        }
 
         return response;
     }

@@ -12,7 +12,11 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8180/realms/wjh-project
-
+  cache:
+    type: redis
+    redis:
+      host: localhost
+      port: 6379
 
 identity-provider:
   url: localhost:8180

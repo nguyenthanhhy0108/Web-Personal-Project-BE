@@ -46,6 +46,11 @@ spring:
         disable-time-limiter: true
   application:
     name: api-gateway
+  cache:
+    type: redis
+    redis:
+      host: localhost
+      port: 6379
 
 
   logging:

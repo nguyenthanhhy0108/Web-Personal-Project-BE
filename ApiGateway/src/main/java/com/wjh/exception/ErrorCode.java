@@ -12,6 +12,7 @@ public enum ErrorCode {
     WRONG_CREDENTIALS(9008, "Wrong credentials", HttpStatus.UNAUTHORIZED),
     GOOGLE_CODE_INVALID(9009, "Google code is invalid", HttpStatus.BAD_REQUEST),
     GOOGLE_INVALID_REDIRECT_URI(9010, "Google redirect URI is invalid", HttpStatus.BAD_REQUEST),
+    UNAUTHORIZED(9998, "You do not have enough permission", HttpStatus.FORBIDDEN),
     ;
 
     private final int code;
